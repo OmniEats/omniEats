@@ -4,26 +4,40 @@ import axios from 'axios'
 class App extends React.Component {
     constructor(){
         super()
+        this.state = {
+            longitude: 0,
+            latitude: 0
+        }
         this.currentLocation = this.currentLocation.bind(this)
-    }
-    currentLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(pos){
-                const location = {
-                    latitude: pos.coords.latitude,
-                    longitude: pos.coords.longitude
-                }
+        this.setLocation = this.setLocation.bind(this)
 
+    }
+     currentLocation() {
+         const {setLocation} = this
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(async function(pos){
+                const location = {
+                latitude: pos.coords.latitude,
+                longitude: pos.coords.longitude
+                }
+              await  setLocation(location)
             })
         } else {
             console.error('Device Not Compatible Must have a GPS module')
         }
     }
-  render() {
 
+    async setLocation(location) {
+        this.setState({latitude: location.latitude, longitude: location.longitude})
+        const response = await axios.post('/api/google', location)
+        console.log(response.data)
+    }
+
+  render() {
+      const { currentLocation } = this
     return (
         <div>
-            <button>Get Nearby Restraunts</button>
+            <button onClick={() => currentLocation() }>Get Nearby Restraunts</button>
         </div>
     )
   }
