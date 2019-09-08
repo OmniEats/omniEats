@@ -1,12 +1,14 @@
 import React from "react";
 import axios from 'axios'
+import MapDisplay from './MapDisplay'
+import {MDBIcon} from 'mdbreact'
 
 class App extends React.Component {
     constructor(){
         super()
         this.state = {
-            longitude: 0,
-            latitude: 0
+            lng: 0,
+            lat: 0
         }
         this.currentLocation = this.currentLocation.bind(this)
         this.setLocation = this.setLocation.bind(this)
@@ -28,18 +30,28 @@ class App extends React.Component {
     }
 
     async setLocation(location) {
-        this.setState({latitude: location.latitude, longitude: location.longitude})
+        this.setState({lat: location.latitude, lng: location.longitude})
         const response = await axios.post('/api/google', location)
         console.log(response.data)
     }
 
   render() {
-      const { currentLocation } = this
-    return (
-        <div>
-            <button onClick={() => currentLocation() }>Get Nearby Restraunts</button>
-        </div>
-    )
+      const { currentLocation } = this;
+      const {lng, lat} = this.state;
+
+    if(lng === 0){
+
+        return (
+            <div>
+                <button onClick={() => currentLocation() }>Get Nearby Restraunts</button>
+            </div>
+        )
+    }
+    else{
+        return (
+            <MapDisplay center={{lat, lng}}/>
+        )
+    }
   }
 }
 
