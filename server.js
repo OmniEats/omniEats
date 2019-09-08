@@ -3,12 +3,15 @@ const app = express()
 const PORT = process.env.PORT || 3000
 const PATH = require('path')
 const distPath = PATH.join(__dirname, "/dist")
+const dotenv = require('dotenv')
 
-console.log(distPath)
+dotenv.config()
+
+app.use(express.urlencoded())
+app.use(express.json())
 
 app.use(express.static(distPath))
-app.use(express.urlencoded({extended: false}))
-app.use(express.json())
+
 
 app.use('/api/google', require('./routes/googleMaps'));
 
