@@ -1,33 +1,28 @@
-import React from 'react';
-import GoogleMapReact from 'google-map-react';
+import React from "react";
+import GoogleMapReact from "google-map-react";
 
 class MapDisplay extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       center: this.props.center,
       zoom: 11
-    }
+    };
   }
 
-  render(){
-    const {center, zoom} = this.state;
+  render() {
+    const { center, zoom } = this.state;
     console.log(center);
-    return(
-      <div style={{ height: '100vh', width: '100%' }}>
+    return (
+      <div style={{ height: "100vh", width: "100%" }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: process.env.MAPKEY}}
+          bootstrapURLKeys={{ key: process.env.MAPKEY }}
           defaultCenter={center}
           defaultZoom={zoom}
-        >
-        </GoogleMapReact>
+        ></GoogleMapReact>
       </div>
-
-    )
-
+    );
   }
-
 }
 
 export default MapDisplay;
-
