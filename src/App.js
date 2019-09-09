@@ -44,7 +44,6 @@ class App extends React.Component {
     const { currentLocation } = this;
     const {lng, lat} = this.state;
     return (
-      if(lng === 0 ){
       <div>
         <button onClick={() => currentLocation()}>Get Nearby Restaurants</button>
         {restaurants.length > 0 ? (
@@ -58,15 +57,9 @@ class App extends React.Component {
         ) : (
           ''
         )}
-      </div>
-    }
-    );
-  }
-  else{
-     return (
-            <MapDisplay center={{lat, lng}}/>
-        )
-    }
+    <MapDisplay center={{lat, lng}}/>
+     </div>
+     )
   }
 }
 

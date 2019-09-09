@@ -16,7 +16,7 @@ class MapDisplay extends React.Component {
     return(
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'INSERT KEY HERE'}}
+          bootstrapURLKeys={{ key: process.env.MAPKEY}}
           defaultCenter={center}
           defaultZoom={zoom}
         >

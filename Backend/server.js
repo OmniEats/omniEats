@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 const seed = require('./seed')
 
 dotenv.config();
-seed()
+
 
 app.use(express.urlencoded());
 app.use(express.json());
