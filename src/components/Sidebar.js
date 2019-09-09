@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 function SideBar() {
   return (
     <div>
-      *Sidebar Test*
     </div>
   );
 }
