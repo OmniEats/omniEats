@@ -4,51 +4,66 @@ import MapDisplay from './MapDisplay'
 import {MDBIcon} from 'mdbreact'
 
 class App extends React.Component {
-    constructor(){
-        super()
-        this.state = {
-            lng: 0,
-            lat: 0
-        }
-        this.currentLocation = this.currentLocation.bind(this)
-        this.setLocation = this.setLocation.bind(this)
+  constructor() {
+    super();
+    this.state = {
+      lng: 0,
+      lat: 0,
+      restaurants: []
+    };
+    this.currentLocation = this.currentLocation.bind(this);
+    this.setLocation = this.setLocation.bind(this);
+  }
+  currentLocation() {
+    const { setLocation } = this;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async function(pos) {
+        const location = {
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude,
+        };
+        await setLocation(location);
+      });
+    } else {
+      console.error('Device Not Compatible Must have a GPS module');
+    }
+  }
 
-    }
-     currentLocation() {
-         const {setLocation} = this
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(async function(pos){
-                const location = {
-                latitude: pos.coords.latitude,
-                longitude: pos.coords.longitude
-                }
-              await  setLocation(location)
-            })
-        } else {
-            console.error('Device Not Compatible Must have a GPS module')
-        }
-    }
-
-    async setLocation(location) {
-        this.setState({lat: location.latitude, lng: location.longitude})
-        const response = await axios.post('/api/google', location)
-        console.log(response.data)
-    }
+  async setLocation(location) {
+    this.setState({
+      lat: location.latitude,
+      lng: location.longitude
+    });
+    const response = await axios.post('/api/google', location);
+    this.setState({restaurants: response.data});
+    console.log(response.data)
+  }
 
   render() {
-      const { currentLocation } = this;
-      const {lng, lat} = this.state;
-
-    if(lng === 0){
-
-        return (
-            <div>
-                <button onClick={() => currentLocation() }>Get Nearby Restraunts</button>
-            </div>
-        )
+    const { restaurants } = this.state;
+    const { currentLocation } = this;
+    const {lng, lat} = this.state;
+    return (
+      if(lng === 0 ){
+      <div>
+        <button onClick={() => currentLocation()}>Get Nearby Restaurants</button>
+        {restaurants.length > 0 ? (
+          <div>
+            <ul>
+              {restaurants.map(restaurant => (
+                <li key={restaurant.id}>{restaurant.name}</li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          ''
+        )}
+      </div>
     }
-    else{
-        return (
+    );
+  }
+  else{
+     return (
             <MapDisplay center={{lat, lng}}/>
         )
     }
