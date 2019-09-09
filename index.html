@@ -1,74 +1,125 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="OmniEats" />
-    <meta name="viewport" content="width=device-width, user-scalable=no" />
-    <link rel="manifest" href="./manifest.json" />
-    <script defer src="./main.js"></script>
 
-    <!-- navbar style tag until create stylesheet -->
-    <style>
-      ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="OmniEats" />
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <link rel="manifest" href="./manifest.json" />
+  <script defer src="./main.js"></script>
 
-      li {
-        float: left;
-      }
+  <!-- navbar style tag until create stylesheet -->
+  <style>
+    .page-container {
+      overflow: hidden;
+      position: relative;
+    }
 
-      li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-      }
+    .page-container:after,
+    .site-header:after {
+      content: ".";
+      display: block;
+      height: 0;
+      overflow: hidden;
+      clear: both;
+      visibility: hidden;
+    }
 
-      li a:hover {
-        background-color: #111;
-      }
-    </style>
+    .site-header {
+      background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 82px;
+      z-index: 1000;
+    }
 
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-    />
-    <!-- Bootstrap core CSS -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- Material Design Bootstrap -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.8/css/mdb.min.css"
-      rel="stylesheet"
-    />
+    .header-main {
+      margin: auto
+    }
 
-    <!-- JQuery -->
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-    ></script>
-    <!-- Bootstrap tooltips -->
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"
-    ></script>
-    <!-- Bootstrap core JavaScript -->
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"
-    ></script>
-    <!-- MDB core JavaScript -->
-  </head>
+    .site-logo {
+      transition: all 0.5s ease 0s;
+      float: left;
+      padding-top: 0px;
+      display: block;
+      text-align: center;
+      padding: 0px 0px 0px 0px;
+    }
 
-  <body>
-    <div id="root"></div>
-  </body>
+    .header-tools {
+      width: 100%;
+      text-align: right;
+      padding-top: 0px;
+    }
+
+    .header-tools:after {
+      content: "";
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      height: 120vh;
+      top: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate3d(-100%, 0, 0);
+      transition: opacity 0.3s, transform 0s ease-in 0.3s;
+    }
+
+    /* .header-container {
+      max-width: 100%;
+      display: inline-block;
+      text-align: left;
+      vertical-align: top;
+    } */
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover {
+      background-color: #111;
+    }
+  </style>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.8/css/mdb.min.css" rel="stylesheet" />
+
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+</head>
+
+<body>
+  <div id="root" class="page-container"></div>
+</body>
+
 </html>
