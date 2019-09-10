@@ -47,7 +47,7 @@ class ListPlaces extends React.Component {
       return (
         <div>
           <div>
-            <button onClick={() => currentLocation()} style={{marginTop: 100}}>
+            <button onClick={() => currentLocation()} style={{marginTop: 90}}>
               Get Nearby Restaurants
             </button>
             {restaurants.length > 0 ? (
