@@ -14,7 +14,7 @@ class MapDisplay extends React.Component {
     const { center, zoom } = this.state;
     console.log(center);
     return (
-      <div style={{ height: "100vh", width: "100%", marginTop: 25 }}>
+      <div style={{ position: 'absolute', height: "100vh", width: "100%", marginTop: 25 }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.MAPKEY }}
           defaultCenter={center}

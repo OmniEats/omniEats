@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 
 function SideBar() {
   return (
-    <div>
+    <div style={{marginTop: 90}}>
+      *Sidebar content will go here*
     </div>
   );
 }
