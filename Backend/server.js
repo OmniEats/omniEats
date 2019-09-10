@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use(express.static(distPath));
 
-app.use('/api/google', require('./routes/googleMaps'));
+app.use('/api', require('./routes/index'));
 
 app.get('/', (req, res, next) => {
   res.sendFile(PATH.join(__dirname, '../index.html'));

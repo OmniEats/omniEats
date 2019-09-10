@@ -36,18 +36,19 @@ class ListPlaces extends React.Component {
     });
     const response = await axios.post("/api/google", location);
     this.setState({ restaurants: response.data });
-    console.log(response.data);
   }
 
   render() {
     const { restaurants } = this.state;
     const { currentLocation } = this;
     const { lng, lat } = this.state;
-    if (lng === 0) {
       return (
         <div>
           <div>
-            <button onClick={() => currentLocation()} style={{marginTop: 100}}>
+            <button
+              onClick={() => currentLocation()}
+              style={{ marginTop: 100 }}
+            >
               Get Nearby Restaurants
             </button>
             {restaurants.length > 0 ? (
@@ -62,12 +63,11 @@ class ListPlaces extends React.Component {
               ""
             )}
           </div>
+          <MapDisplay center={{ lat, lng }} places={restaurants} />;
         </div>
       );
-    } else {
-      return <MapDisplay center={{ lat, lng }} />;
     }
   }
-}
+
 
 export default ListPlaces;
