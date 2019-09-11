@@ -13,8 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(distPath));
 
-app.use("/api/google", require("./routes/googleMaps"));
-app.use("/api/users", require("./routes/users"));
+app.use('/api', require('./routes/index'));
 
 app.get("/", (req, res, next) => {
   res.sendFile(PATH.join(__dirname, "../index.html"));
