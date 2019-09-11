@@ -11,14 +11,14 @@
   <!-- navbar style tag until create stylesheet -->
   <style>
     .page-container {
-      overflow: hidden;
       position: relative;
+      display: flex;
     }
 
     .page-container:after,
     .site-header:after {
       content: ".";
-      display: block;
+      display: flex;
       height: 0;
       overflow: hidden;
       clear: both;
@@ -43,9 +43,35 @@
       transition: all 0.5s ease 0s;
       float: left;
       padding-top: 0px;
-      display: block;
+      display: flex;
       text-align: center;
       padding: 0px 0px 0px 0px;
+    }
+
+    .site-logo a {
+      font-family: Roboto;
+      font-weight: 700;
+      font-style: normal;
+      vertical-align: middle;
+      font-size: 32px;
+      text-decoration: none;
+      color: #6a676e;
+      line-height: 22px;
+    }
+
+    img {
+      max-width: 100%;
+      box-sizing: border-box;
+      height: auto;
+    }
+
+    img,
+    a {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
     }
 
     .header-tools {
@@ -68,17 +94,61 @@
       transition: opacity 0.3s, transform 0s ease-in 0.3s;
     }
 
-    /* .header-container {
-      max-width: 100%;
-      display: inline-block;
-      text-align: left;
+    .login-button {
+      font-family: Roboto;
+      font-weight: 700;
+      font-style: normal;
+      background: #825bae;
       vertical-align: top;
-    } */
+      max-width: 100%;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      overflow: hidden;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      -moz-box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+      -webkit-box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+      -moz-transition: all 0.5s;
+      -webkit-transition: all 0.5s;
+      transition: all 0.5s;
+      text-transform: uppercase;
+      background: #fff;
+      vertical-align: middle;
+      font-size: 13px;
+      text-transform: uppercase;
+      color: #333;
+    }
+
+    .ul-drop {
+      height: 82px;
+    }
+
+    .header-title {
+      display: flex;
+      justify-content: flex-start;
+      align-content: left;
+      width: 725px;
+      color: #fff;
+      font-weight: bold;
+      padding: 7px;
+      font-size: 30px;
+      margin-left: 15px;
+    }
+
+    .ul-drop .ul-contents {
+      display: flex;
+      justify-content: flex-end;
+      align-content: right;
+    }
 
     ul {
+      display: flex;
       list-style-type: none;
-      margin: 0;
-      padding: 0;
+      margin: 0px;
+      padding: 15px;
       overflow: hidden;
       background-color: #333;
     }
@@ -88,7 +158,7 @@
     }
 
     li a {
-      display: block;
+      display: flex;
       color: white;
       text-align: center;
       padding: 14px 16px;
