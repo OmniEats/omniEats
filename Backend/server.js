@@ -21,4 +21,6 @@ app.get("/", (req, res, next) => {
 
 app.listen(PORT, () => console.log("I Am Listening to You"));
 
+app.use('/testing', (req, res) => res.send('someText!'))
+
 module.exports = app;
