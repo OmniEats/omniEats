@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 3000;
 const PATH = require("path");
 const distPath = PATH.join(__dirname, "../dist");
 const dotenv = require("dotenv");
-const seed = require("./seed");
+const db = require('./db');
 
 dotenv.config();
 
@@ -19,7 +19,11 @@ app.get("/", (req, res, next) => {
   res.sendFile(PATH.join(__dirname, "../index.html"));
 });
 
-app.listen(PORT, () => console.log("I Am Listening to You"));
+db.sync()
+  .then(() => {
+    app.listen(PORT, () => console.log(`App listening at port: ${PORT}`));
+  })
+  .catch(console.error)
 
 app.use('/testing', (req, res) => res.send('someText!'))
 
