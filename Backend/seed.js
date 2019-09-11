@@ -11,7 +11,6 @@ const seed = async () => {
       email: "test@test.com"
     });
 
-    await db.close();
   } catch (error) {
     console.log(error);
   }

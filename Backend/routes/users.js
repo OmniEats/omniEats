@@ -30,7 +30,6 @@ router.post("/", async (req, res, next) => {
       email: req.body.email,
       password: req.body.password
     });
-    req.session.userId = newItem.id;
     res.status(201).send(createUser);
   } catch (err) {
     next(err);

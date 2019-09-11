@@ -60,7 +60,7 @@ class ListPlaces extends React.Component {
               ""
             )}
           </div>
-          <MapDisplay center={{ lat, lng }} places={restaurants} />;
+          <MapDisplay center={{ lat, lng }} places={restaurants} />
         </div>
       );
     }
