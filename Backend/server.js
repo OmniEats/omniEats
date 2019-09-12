@@ -8,6 +8,8 @@ const seed = require('./seed');
 
 dotenv.config();
 
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

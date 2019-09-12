@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "seed": "node Backend/seed.js",
-    "postinstall": "npm run webpack",
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --watch --mode=development",
     "start:dev": "npm run webpack:dev & nodemon ./Backend/server.js --ignore dist --ignore src"
@@ -51,6 +50,7 @@
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
+    "reactjs-popup": "^1.5.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.18.4",

@@ -8,9 +8,15 @@ class App extends React.Component {
   render() {
     return (
       <Router>
+        <div>
+        <div>
         <NavBar />
+        </div>
+        <div>
         <Route exact path="/" component={Home} />
         <Route path="/:filter" render={({ match }) => <Home match={match} />} />
+        </div>
+        </div>
       </Router>
     );
   }
