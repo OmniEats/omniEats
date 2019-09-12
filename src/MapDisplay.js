@@ -7,8 +7,8 @@ class MapDisplay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      center: this.props.center,
-      zoom: 11,
+      center: {lat:36.031695, lng:-121.627273},
+      zoom: 7,
       restaurants: []
     };
 
@@ -23,7 +23,7 @@ class MapDisplay extends React.Component {
     const { center, zoom, restaurants } = this.state;
     console.log(restaurants)
     return (
-      <div style={{ position: 'absolute', height: "100vh", width: "100%", marginTop: 25 }}>
+      <div style={{ position: 'absolute', height: "77vh", width: "85vw", marginTop: 25 }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.MAPKEY }}
           defaultCenter={center}
