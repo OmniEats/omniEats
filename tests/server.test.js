@@ -19,6 +19,7 @@ describe('test route', function() {
           done(err);
         } else {
           expect(text).toBeTruthy();
+          expect(text).toBe('someText!');
           done();
         }
       });
