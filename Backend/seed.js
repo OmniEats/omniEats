@@ -10,11 +10,8 @@ const seed = async () => {
       password: "test",
       email: "test@test.com"
     });
-
-    await db.close();
   } catch (error) {
     console.log(error);
   }
 };
-seed();
 module.exports = seed;

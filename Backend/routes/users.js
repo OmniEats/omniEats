@@ -1,7 +1,7 @@
-const router = require("express").Router();
-const { User } = require("../index");
+const router = require('express').Router();
+const { User } = require('../index');
 
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     res.send(await User.findAll());
   } catch (e) {
@@ -9,7 +9,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const aUser = await User.findOne({
       where: {
@@ -22,7 +22,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const createUser = await User.create({
       firstName: req.body.firstName,
@@ -30,14 +30,13 @@ router.post("/", async (req, res, next) => {
       email: req.body.email,
       password: req.body.password
     });
-    req.session.userId = newItem.id;
     res.status(201).send(createUser);
   } catch (err) {
     next(err);
   }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
     const updateUser = await User.findByPk(req.params.id);
     updateUser.update({
@@ -51,14 +50,14 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     await User.destroy({
       where: {
         id: req.params.id
       }
     });
-    res.status(404).send("User deleted");
+    res.status(404).send('User deleted');
   } catch (err) {
     next(err);
   }

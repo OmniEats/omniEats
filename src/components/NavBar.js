@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import SideBar from "./SideBar";
+import Sidebar from "./Sidebar";
 
 function NavBar() {
   return (
@@ -65,7 +65,7 @@ function NavBar() {
           </div>
         </div>
       </header>
-      <SideBar />
+      <Sidebar />
     </div>
   );
 }
