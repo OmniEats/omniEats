@@ -26,6 +26,7 @@ router.post('/', (req, res, next) => {
           }
         });
       });
+      console.log(results.json.results);
       res.send(results.json.results);
     })
     .catch(err => console.error(err));
