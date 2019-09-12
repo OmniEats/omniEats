@@ -4,7 +4,10 @@ const OmniRating = require("./models/OmniRating");
 const User = require("./models/User");
 
 OmniRating.belongsTo(Restaurant);
-Restaurant.hasMany(OmniRating);
+Restaurant.hasOne(OmniRating);
+
+OmniRating.belongsToMany(User, {through: UserOmni})
+User.belongsToMany(OmniRating, {through: UserOmni} )
 
 module.exports = {
   db,
