@@ -8,7 +8,8 @@
     "postinstall": "npm run webpack",
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --watch --mode=development",
-    "start:dev": "npm run webpack:dev & nodemon ./Backend/server.js --ignore dist --ignore src"
+    "start:dev": "npm run webpack:dev & nodemon ./Backend/server.js --ignore dist --ignore src",
+    "test": "jest --detectOpenHandles"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.6.0",
+    "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "@google/maps": "^0.5.5",
@@ -57,5 +59,9 @@
     "sequelize": "^5.18.4",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.8"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "supertest": "^4.0.2"
   }
 }
