@@ -20,21 +20,21 @@ const OmniRating = db.define('omniRating', {
 
 OmniRating.prototype.onVote = async function(vote) {
   this.ratingsCount++;
-  if (vote === 'yes') {
-    this.totalScore++;
+  if (vote === 'Meat Lovers') {
+    this.totalScore++
   }
-  if (vote === 'no') {
+  if (vote === 'vegetarian') {
     this.totalScore--
   }
   const avgScore = this.totalScore / this.ratingsCount
    if (avgScore >= .33) {
-     this.rating = 'yes'
+     this.rating = "Meat Lovers"
    }
    if (avgScore <= -.33) {
-     this.rating = 'no'
+     this.rating = 'Vegtarian'
    }
    if (avgScore < .33 && avgScore >-.33) {
-    this.rating = 'maybe'
+    this.rating = 'Half-Half'
    }
 
   await this.save();

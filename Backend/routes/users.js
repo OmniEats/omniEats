@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../index');
+const User = require('../index');
 
 router.get('/', async (req, res, next) => {
   try {

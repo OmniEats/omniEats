@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
 const PATH = require('path');
 const session = require("express-session")
 const cookie_parser = require('cookie-parser')
@@ -89,7 +88,5 @@ app.delete('/login', async (req, res, next) => {
     next(ex);
   }
 });
-
-app.listen(PORT, () => console.log('I Am Listening to You'));
 
 module.exports = app;

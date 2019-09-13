@@ -7,7 +7,7 @@
     "seed": "node Backend/seed.js",
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --watch --mode=development",
-    "start:dev": "npm run webpack:dev & nodemon ./Backend/server.js --ignore dist --ignore src"
+    "start:dev": "npm run webpack:dev & nodemon ./Backend/app.js --ignore dist --ignore src"
   },
   "repository": {
     "type": "git",
