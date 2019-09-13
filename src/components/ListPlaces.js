@@ -52,7 +52,7 @@ class ListPlaces extends React.Component {
               <div>
                 <ul>
                   {restaurants.map(restaurant => (
-                    <li key={restaurant.id}>{restaurant.name}</li>
+                    <li key={restaurant.id} style={{color: '#fff'}}>{restaurant.name}</li>
                   ))}
                 </ul>
               </div>
@@ -60,7 +60,7 @@ class ListPlaces extends React.Component {
               ""
             )}
           </div>
-          <MapDisplay center={{ lat, lng }} places={restaurants} />;
+          <MapDisplay center={{ lat, lng }} places={restaurants} />
         </div>
       );
     }

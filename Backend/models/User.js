@@ -42,6 +42,10 @@ User.beforeCreate(userInstance => {
   userInstance.password = hashPassword(userInstance.password);
 });
 
+User.beforeUpdate(userInstance => {
+  userInstance.password = hashPassword(userInstance.password);
+});
+
 User.verifyPassword = function(user, password) {
   return user.password === hashPassword(password) ? true : false;
 };

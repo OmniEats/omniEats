@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+<<<<<<< HEAD
 const PATH = require('path');
 const session = require("express-session")
 const cookie_parser = require('cookie-parser')
@@ -7,6 +8,13 @@ const distPath = PATH.join(__dirname, '../dist');
 const dotenv = require('dotenv');
 const seed = require('./seed');
 const { User, hashPassword } = require('./models/User')
+=======
+const PORT = process.env.PORT || 3000;
+const PATH = require("path");
+const distPath = PATH.join(__dirname, "../dist");
+const dotenv = require("dotenv");
+const db = require('./db');
+>>>>>>> master
 
 dotenv.config();
 
