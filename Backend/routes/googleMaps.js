@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { models } = require('../index');
-const { Location, Restaurant } = models;
+const { Restaurant } = models;
 const googleMaps = require('@google/maps').createClient({
   Promise: Promise,
   key: process.env.MAPKEY
@@ -24,7 +24,7 @@ router.post('/', (req, res, next) => {
               latitude: place.geometry.location.lat,
               longitude: place.geometry.location.lng
           }
-        });
+        })
       });
       res.send(results.json.results);
     })

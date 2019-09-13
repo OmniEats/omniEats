@@ -23,7 +23,6 @@ class App extends React.Component {
         <Route exact path="/mixed" component={MixedBar} />
         <Route exact path="/veggie" component={VeggieBar} />
         <Route exact path="/" component={Home} />
-        <Route path="/:filter" render={({ match }) => <Home match={match} />} />
         <Route path="/login"component={MainLogin} />
         </div>
         </div>

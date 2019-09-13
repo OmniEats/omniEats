@@ -14,7 +14,7 @@ const _getMileRestaurants = restaurants => {
 export const getMileRestaurants = (userLocation) => {
   return async dispatch => {
     try {
-      const response = axios.post('/api/google', userLocation)
+      const response = await axios.post('/api/google', userLocation)
       dispatch(_getMileRestaurants(response.data))
     } catch (ex) {
       console.error(ex.message)
