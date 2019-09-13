@@ -9,7 +9,7 @@
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --watch --mode=development",
     "start:dev": "npm run webpack:dev & nodemon ./Backend/server.js --ignore dist --ignore src",
-    "test": "jest --detectOpenHandles"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
