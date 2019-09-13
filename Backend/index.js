@@ -6,6 +6,7 @@ const { User } = require('./models/User');
 OmniRating.belongsTo(Restaurant);
 Restaurant.hasOne(OmniRating);
 
+
 OmniRating.belongsToMany(User, { through: 'userOmni' });
 User.belongsToMany(OmniRating, { through: 'userOmni' });
 
