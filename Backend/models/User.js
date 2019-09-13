@@ -1,9 +1,9 @@
-const db = require("../db");
-const Sequelize = require("sequelize");
-const crypto = require("crypto");
-require("dotenv").config();
+const db = require('../db');
+const Sequelize = require('sequelize');
+const crypto = require('crypto');
+require('dotenv').config();
 
-const User = db.define("user", {
+const User = db.define('user', {
   id: {
     defaultValue: Sequelize.UUIDV4,
     primaryKey: true,
@@ -31,11 +31,11 @@ const User = db.define("user", {
 });
 
 function hashPassword(password) {
-  const secret = process.env.SALT_HASH || "find some grub";
+  const secret = process.env.SALT_HASH || 'find some grub';
   return crypto
-    .createHmac("sha256", secret)
+    .createHmac('sha256', secret)
     .update(password)
-    .digest("hex");
+    .digest('hex');
 }
 
 User.beforeCreate(userInstance => {
@@ -46,4 +46,7 @@ User.verifyPassword = function(user, password) {
   return user.password === hashPassword(password) ? true : false;
 };
 
-module.exports = User;
+module.exports = {
+  User,
+  hashPassword
+};
