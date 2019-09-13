@@ -8,8 +8,14 @@
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --watch --mode=development",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "start:dev": "npm run webpack:dev & nodemon ./Backend/server.js --ignore dist --ignore src",
     "test": "jest"
+=======
+    "start:dev": "npm run webpack:dev & nodemon ./Backend/app.js --ignore dist --ignore src",
+    "build": "npm run webpack",
+    "start": "node Backend/app.js"
+>>>>>>> master
 =======
     "start:dev": "npm run webpack:dev & nodemon ./Backend/app.js --ignore dist --ignore src",
     "build": "npm run webpack",
