@@ -10,7 +10,7 @@ router.post('/', (req, res, next) => {
   const { latitude, longitude } = req.body;
   const location = { latitude, longitude };
   googleMaps
-    .placesNearby({ location: location, radius: 1649, type: 'restaurant' })
+    .placesNearby({ location: location, radius: 1609, type: 'restaurant' })
     .asPromise()
     .then(results => {
       results.json.results.forEach(place => {

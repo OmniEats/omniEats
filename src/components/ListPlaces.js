@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Popup from 'reactjs-popup'
 import MapDisplay from './MapDisplay';
 import { MDBIcon } from 'mdbreact';
 import { getMileRestaurants } from '../store';
@@ -9,10 +10,12 @@ class ListPlaces extends React.Component {
     super(props);
     this.state = {
       lng: 0,
-      lat: 0
+      lat: 0,
+      selectedRestaurant: ''
     };
     this.currentLocation = this.currentLocation.bind(this);
     this.setLocation = this.setLocation.bind(this);
+    this.onSelectChange = this.onSelectChange.bind(this)
   }
   currentLocation() {
     const { setLocation } = this;
@@ -38,16 +41,31 @@ class ListPlaces extends React.Component {
     });
   }
 
+  onSelectChange(ev) {
+    this.setState({selectedRestaurant: ev.target.value})
+  }
+
   render() {
-    const { currentLocation } = this;
-    const { lng, lat } = this.state;
+    const { currentLocation, onSelectChange} = this;
+    const { lng, lat, selectedRestaurant } = this.state;
     const { googleRestaurants } = this.props;
+    console.log(selectedRestaurant)
     return (
       <div>
         <div>
           <button onClick={() => currentLocation()} style={{ marginTop: 90 }}>
             Get Nearby Restaurants
           </button>
+          <Popup trigger={<button>Omnivore Rating</button>} position="bottom center">
+              <div>
+                <select defaultValue={"No Data"} onChange={onSelectChange}>
+                  {googleRestaurants.map(restaurant => <option key={restaurant.id} value={restaurant.id}>{restaurant.name}</option>)}
+                </select>
+                {selectedRestaurant.id ? <h1>selectedRestaurant.name</h1> : ""}
+                <Rating />
+              </div>
+          </Popup>
+          
           {googleRestaurants.length > 0 ? (
             <div>
               <ul>

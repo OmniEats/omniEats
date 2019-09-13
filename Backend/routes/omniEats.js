@@ -11,4 +11,12 @@ router.get('/', async(req, res, next) => {
   }
 })
 
+router.get('/:id', async(req, res, next) => {
+  try {
+    
+  } catch(ex) {
+    next(ex.message)
+  }
+    
+})
 module.exports = router
