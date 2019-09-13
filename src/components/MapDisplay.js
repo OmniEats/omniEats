@@ -8,7 +8,7 @@ class MapDisplay extends React.Component {
     super(props);
     this.state = {
       center: this.props.center,
-      zoom: 11,
+      zoom: 7,
       restaurants: []
     };
   }
