@@ -8,7 +8,7 @@
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --watch --mode=development",
     "start:dev": "npm run webpack:dev & nodemon ./Backend/app.js --ignore dist --ignore src",
-    "build": "npm run webpack --env.API_URL=https://omnieats.herokuapp.com/#/ --config webpack.config.build.js",
+    "build": "npm run webpack --env.API_URL=https://omnieats.herokuapp.com/#/ --config webpack.config.js",
     "start": "node Backend/app.js"
   },
   "repository": {
