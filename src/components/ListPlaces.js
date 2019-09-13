@@ -9,9 +9,9 @@ class ListPlaces extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lng: 0,
-      lat: 0,
-      selectedRestaurant: ''
+      selectedRestaurant: '',
+      lng: -121,
+      lat: 36
     };
     this.currentLocation = this.currentLocation.bind(this);
     this.setLocation = this.setLocation.bind(this);
