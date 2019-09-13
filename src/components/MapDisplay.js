@@ -20,7 +20,6 @@ class MapDisplay extends React.Component {
 
   render() {
     const { center, zoom, restaurants } = this.state;
-    console.log(restaurants);
     return (
       <div
         style={{
@@ -31,7 +30,7 @@ class MapDisplay extends React.Component {
         }}
       >
         <GoogleMapReact
-          bootstrapURLKeys={{ key: process.env.MAPKEY }}
+          bootstrapURLKeys={{ key: process.env.MAPKEY || 'AIzaSyA50mDPBaEgfNWestAu7oPjFK85h1rhE88'}}
           defaultCenter={center}
           defaultZoom={zoom}
         >
