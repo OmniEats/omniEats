@@ -22,4 +22,5 @@ export {
   loginUser,
   logoutUser,
   createUser,
+  _catchError
 }
