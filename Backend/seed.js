@@ -10,10 +10,8 @@ const seed = async () => {
       password: "test",
       email: "test@test.com"
     });
-
   } catch (error) {
     console.log(error);
   }
 };
-seed();
 module.exports = seed;

@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "seed": "node Backend/seed.js",
-    "postinstall": "npm run webpack",
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --watch --mode=development",
+<<<<<<< HEAD
     "start:dev": "npm run webpack:dev & nodemon ./Backend/server.js --ignore dist --ignore src",
     "test": "jest"
+=======
+    "start:dev": "npm run webpack:dev & nodemon ./Backend/app.js --ignore dist --ignore src"
+>>>>>>> master
   },
   "repository": {
     "type": "git",
@@ -43,10 +46,12 @@
     "@google/maps": "^0.5.5",
     "axios": "^0.19.0",
     "babel-loader": "^8.0.6",
+    "cookie-parser": "^1.4.4",
     "bootstrap": "^4.3.1",
     "dotenv": "^8.1.0",
     "dotenv-webpack": "^1.7.0",
     "express": "^4.17.1",
+    "express-session": "^1.16.2",
     "google-map-react": "^1.1.4",
     "mdbreact": "^4.19.2",
     "pg": "^7.12.1",
@@ -54,6 +59,7 @@
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
+    "reactjs-popup": "^1.5.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.18.4",
