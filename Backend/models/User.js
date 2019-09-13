@@ -31,7 +31,7 @@ const User = db.define('user', {
 });
 
 function hashPassword(password) {
-  const secret = process.env.SALT_HASH || 'find some eats';
+  const secret = process.env.SALT_HASH || 'find some grub';
   return crypto
     .createHmac('sha256', secret)
     .update(password)
@@ -50,4 +50,7 @@ User.verifyPassword = function(user, password) {
   return user.password === hashPassword(password) ? true : false;
 };
 
-module.exports = User;
+module.exports = {
+  User,
+  hashPassword
+};

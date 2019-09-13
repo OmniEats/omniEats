@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import MapDisplay from "../MapDisplay";
+import MapDisplay from "./MapDisplay";
 import { MDBIcon } from "mdbreact";
 
 class ListPlaces extends React.Component {
