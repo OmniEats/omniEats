@@ -4,7 +4,10 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Sidebar from '../Backend/Sidebar';
 import Home from './components/Home';
-import MainLogin from './components/MainLogin'
+import MainLogin from './components/MainLogin';
+import MeatBar from './components/MeatBar';
+import MixedBar from './components/MixedBar';
+import VeggieBar from './components/VeggieBar';
 
 
 class App extends React.Component {
