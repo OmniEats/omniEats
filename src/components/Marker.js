@@ -2,8 +2,7 @@ import React from 'react';
 import Popup from 'reactjs-popup';
 
 const Marker = props => {
-  const { color, name, key, lat, lng } = props;
-
+  const { color, name, lat, lng } = props;
   return (
     <Popup
       trigger={

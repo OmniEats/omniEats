@@ -57,13 +57,7 @@ class ListPlaces extends React.Component {
             Get Nearby Restaurants
           </button>
           <Popup trigger={<button>Omnivore Rating</button>} position="bottom center">
-              <div>
-                <select defaultValue={"No Data"} onChange={onSelectChange}>
-                  {googleRestaurants.map(restaurant => <option key={restaurant.id} value={restaurant.id}>{restaurant.name}</option>)}
-                </select>
-                {selectedRestaurant.id ? <h1>selectedRestaurant.name</h1> : ""}
-                <Rating />
-              </div>
+              
           </Popup>
           
           {googleRestaurants.length > 0 ? (
