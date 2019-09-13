@@ -10,6 +10,10 @@ const { User, hashPassword } = require('./models/User')
 
 dotenv.config();
 
+if(process.env.SEED) {
+  seed()
+}
+
 app.use(cookie_parser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
