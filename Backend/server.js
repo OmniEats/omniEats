@@ -93,4 +93,7 @@ app.delete('/login', async (req, res, next) => {
   }
 });
 
+//jest testing route
+app.get('/serverTesting', (req, res) => res.send('sucessful'));
+
 module.exports = app;
