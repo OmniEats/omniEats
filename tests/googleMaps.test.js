@@ -16,7 +16,6 @@ describe('test google maps loads from /api/googleMaps', function () {
       .end((err, res) => {
         if(err) return done(err);
         else {
-          console.log(res.body[1])
           expect(res.body).toBeTruthy();
           expect(res.body[1].name).toBe('Zuni Café');
           done();
