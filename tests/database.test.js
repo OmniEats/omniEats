@@ -15,7 +15,6 @@ beforeEach(async () => {
     latitude: 10.10,
     longitude: 33.33,
   });
-  console.log('testurant, ', testurant);
 });
 
 afterEach(async () => {
@@ -26,7 +25,7 @@ afterEach(async () => {
 afterAll(() => db.close());
 
 describe('database testing', () => {
-  test('database', () => {
+  test('check if new entry is created in database', () => {
     const values = testurant.toJSON();
     // remove id from values b/c always unique
     const id = values.id;
