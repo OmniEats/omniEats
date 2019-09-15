@@ -1,8 +1,6 @@
 import React from "react";
-import ListPlaces from "./ListPlaces";
+import MapDisplay from "./MapDisplay";
 
 export default function Home() {
-  return (
-  <ListPlaces />
-  );
+  return <MapDisplay />
 }
