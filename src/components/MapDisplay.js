@@ -2,24 +2,28 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux'
 import Marker from './Marker';
-import { getAllOmniEats } from '../store';
+import { getAllOmniEats, currentLocation } from '../store';
 
 class MapDisplay extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      center: this.props.center,
-      zoom: 7,
-    };
+    constructor(props){
+      super(props)
+    }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.center.lat !== this.props.center.lat || prevProps.center.lat !== this.props.center.lat ) {
+      console.log("hello")
+      this.props.getUserLocation()
+      this.props.allOmniEats()
+    }
   }
 
   componentDidMount() {
+    this.props.getUserLocation()
     this.props.allOmniEats()
   }
 
   render() {
-    const { center, zoom } = this.state;
-    const { omniEatsRestaurants } = this.props
+    const { omniEatsRestaurants, center, zoom } = this.props
     return (
       <div
         style={{
@@ -54,15 +58,18 @@ class MapDisplay extends React.Component {
   }
 }
 
-const stateToProps = ({ omniEatsRestaurants }) => {
+const stateToProps = ({ omniEatsRestaurants, userLocation }) => {
   return {
-    omniEatsRestaurants
+    omniEatsRestaurants,
+    center: userLocation,
+    zoom: 15
   }
 }
 
 const dispatchToProps = dispatch => {
   return {
-    allOmniEats: () => dispatch(getAllOmniEats())
+    allOmniEats: () => dispatch(getAllOmniEats()),
+    getUserLocation: () => dispatch(currentLocation())
   }
 }
 
