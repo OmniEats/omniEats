@@ -37,7 +37,7 @@ export const loginReducer = (state = {}, action) => {
       return action.user;
     case LOGOUT_USER:
       state = {};
-      return state;
+     break;
   }
   return state;
 };

@@ -1,10 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux"
 import Sidebar from "./SideBar";
 import images from "../assets/images"
+import { logoutUser } from "../store";
 
-function NavBar() {
-
+function NavBar({ loggedInUser, logout }) {
   return (
     <div>
       <header id="nav-bar" className="site-header">
@@ -28,6 +29,7 @@ function NavBar() {
                         <a href="/" className="header-title">
                           OmniEats
                         </a>
+                        {loggedInUser.fullName ? <h2 style={{color: 'white'}}>Welcome {loggedInUser.fullName}</h2> : ''}
                         <div className="ul-contents">
                           <li>
                             <NavLink className="navlink" exact to="/">
@@ -49,6 +51,7 @@ function NavBar() {
                             </NavLink>
                           </li>
                           <li>
+                            {!loggedInUser.id ?
                             <NavLink
                               className="navlink login-button"
                               exact
@@ -56,6 +59,11 @@ function NavBar() {
                             >
                               Login or Register
                             </NavLink>
+                            :
+                            <button type="submit" className="login-button" onClick={() => logout()}>
+                              Logout
+                            </button>
+                            }
                           </li>
                         </div>
                       </ul>
@@ -72,4 +80,16 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+const stateToProps = ({ loggedInUser }) => {
+  return {
+    loggedInUser
+  }
+}
+
+const dispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(logoutUser())
+  }
+}
+
+export default connect(stateToProps,dispatchToProps)(NavBar);

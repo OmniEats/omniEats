@@ -17,7 +17,7 @@ class Rating extends React.Component {
   render() {
     const { vote } = this.state;
     const { onSelectChange } = this;
-    const { makeVote, restaurantId } = this.props;
+    const { makeVote, restaurantId, loggedInUser } = this.props;
     return (
       <div>
         <select defaultValue={'No Data'} onChange={onSelectChange}>
@@ -27,6 +27,7 @@ class Rating extends React.Component {
         </select>
         <button
           type="submit"
+          disabled={!loggedInUser.id ? true : false}
           onClick={ev => {
             ev.preventDefault();
             makeVote({ restaurantId, vote });
@@ -39,11 +40,11 @@ class Rating extends React.Component {
   }
 }
 
-// const stateToProps = ({ googleRestaurants }) => {
-//   return {
-//     googleRestaurants
-//   };
-// };
+const stateToProps = ({ loggedInUser }) => {
+  return {
+    loggedInUser
+  };
+};
 
 const dispatchToProps = dispatch => {
   return {
@@ -52,6 +53,6 @@ const dispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  stateToProps,
   dispatchToProps
 )(Rating);
