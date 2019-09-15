@@ -14,7 +14,6 @@ class MapDisplay extends React.Component {
       prevProps.center.lat !== this.props.center.lat ||
       prevProps.center.lat !== this.props.center.lat
     ) {
-      console.log('hello');
       this.props.getUserLocation();
       this.props.allOmniEats();
     }
