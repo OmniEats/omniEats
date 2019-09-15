@@ -41,26 +41,12 @@ class ListPlaces extends React.Component {
   render() {
     const { currentLocation } = this;
     const { lng, lat } = this.state;
-    const { googleRestaurants } = this.props;
     return (
       <div>
         <div>
-          <button onClick={() => currentLocation()} style={{ marginTop: 90 }}>
+          <button type="button" onClick={() => currentLocation()} style={{ marginTop: 90 }}>
             Get Nearby Restaurants
           </button>
-          {googleRestaurants.length > 0 ? (
-            <div>
-              <ul>
-                {googleRestaurants.map(restaurant => (
-                  <li key={restaurant.id} style={{ color: '#fff' }}>
-                    {restaurant.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            ''
-          )}
         </div>
         <MapDisplay center={{ lat, lng }} />
       </div>

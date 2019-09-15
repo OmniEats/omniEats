@@ -2,7 +2,6 @@
 import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import Sidebar from '../Backend/Sidebar';
 import Home from './components/Home';
 import MainLogin from './components/MainLogin';
 import MeatBar from './components/MeatBar';
