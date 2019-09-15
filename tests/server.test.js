@@ -5,7 +5,7 @@ const request = require('supertest')
 const server = require('../Backend/server');
 const { db } = require('../Backend/index')
 
-beforeAll(() => db.sync());
+beforeAll(() => db.sync({force: true}));
 afterAll(() => db.close());
 
 describe('test route', function() {
