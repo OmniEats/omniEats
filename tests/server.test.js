@@ -12,14 +12,14 @@ describe('test route', function() {
   test('it should send back: someText!',
   done => {
     request(server)
-      .get('/testing')
+      .get('/serverTesting')
       .expect(200)
       .end((err, { text }) => {
         if (err) {
           done(err);
         } else {
           expect(text).toBeTruthy();
-          expect(text).toBe('someText!');
+          expect(text).toBe('sucessful');
           done();
         }
       });
