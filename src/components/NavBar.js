@@ -6,7 +6,6 @@ import images from "../assets/images"
 import { logoutUser } from "../store";
 
 function NavBar({ loggedInUser, logout }) {
-console.log(loggedInUser)
   return (
     <div>
       <header id="nav-bar" className="site-header">
