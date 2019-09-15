@@ -5,7 +5,7 @@ const app = require('../Backend/server');
 const { db, models } = require('../Backend/index');
 const Resturant = require('../Backend/models/Restaurant');
 
-beforeAll(() => db.sync());
+beforeAll(() => db.sync({force: true}));
 
 let testurant;
 beforeEach(async () => {
