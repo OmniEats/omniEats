@@ -9,13 +9,11 @@ class ListPlaces extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedRestaurant: '',
       lng: -121,
       lat: 36
     };
     this.currentLocation = this.currentLocation.bind(this);
     this.setLocation = this.setLocation.bind(this);
-    this.onSelectChange = this.onSelectChange.bind(this)
   }
   currentLocation() {
     const { setLocation } = this;
@@ -41,38 +39,15 @@ class ListPlaces extends React.Component {
     });
   }
 
-  onSelectChange(ev) {
-    this.setState({selectedRestaurant: ev.target.value})
-  }
-
   render() {
-    const { currentLocation, onSelectChange} = this;
-    const { lng, lat, selectedRestaurant } = this.state;
-    const { googleRestaurants } = this.props;
-    console.log(selectedRestaurant)
+    const { currentLocation } = this;
+    const { lng, lat } = this.state;
     return (
       <div>
         <div>
-          <button onClick={() => currentLocation()} style={{ marginTop: 90 }}>
+          <button type="button" onClick={() => currentLocation()} style={{ marginTop: 90 }}>
             Get Nearby Restaurants
           </button>
-          <Popup trigger={<button>Omnivore Rating</button>} position="bottom center">
-              
-          </Popup>
-          
-          {googleRestaurants.length > 0 ? (
-            <div>
-              <ul>
-                {googleRestaurants.map(restaurant => (
-                  <li key={restaurant.id} style={{ color: '#fff' }}>
-                    {restaurant.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            ''
-          )}
         </div>
         <MapDisplay center={{ lat, lng }} />
       </div>

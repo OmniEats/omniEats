@@ -15,7 +15,10 @@ const OmniRating = db.define('omniRating', {
     type: Sequelize.ENUM('Vegetarian', 'Half-Half', 'Meat Lovers', 'No Data'),
     defaultValue: 'No Data'
   },
-  totalScore: Sequelize.INTEGER
+  totalScore: {
+  type:  Sequelize.INTEGER,
+  defaultValue: 0
+  }
 });
 
 OmniRating.prototype.onVote = async function(vote) {
@@ -23,7 +26,7 @@ OmniRating.prototype.onVote = async function(vote) {
   if (vote === 'Meat Lovers') {
     this.totalScore++
   }
-  if (vote === 'vegetarian') {
+  if (vote === 'Vegetarian') {
     this.totalScore--
   }
   const avgScore = this.totalScore / this.ratingsCount

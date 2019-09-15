@@ -1,7 +1,8 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
-import axios from 'axios';
+import { connect } from 'react-redux'
 import Marker from './Marker';
+import { getAllOmniEats } from '../store';
 
 class MapDisplay extends React.Component {
   constructor(props) {
@@ -9,17 +10,16 @@ class MapDisplay extends React.Component {
     this.state = {
       center: this.props.center,
       zoom: 7,
-      restaurants: []
     };
   }
 
-  async componentDidMount() {
-    const response = await axios.get('/api/omniEats');
-    this.setState({ restaurants: response.data });
+  componentDidMount() {
+    this.props.allOmniEats()
   }
 
   render() {
-    const { center, zoom, restaurants } = this.state;
+    const { center, zoom } = this.state;
+    const { omniEatsRestaurants } = this.props
     return (
       <div
         style={{
@@ -34,13 +34,15 @@ class MapDisplay extends React.Component {
           defaultCenter={center}
           defaultZoom={zoom}
         >
-          {restaurants.map(restaurant => (
+          {omniEatsRestaurants.map(restaurant => (
             <Marker
+              restaurantId={restaurant.id}
               key={restaurant.id}
               lat={restaurant.latitude}
               lng={restaurant.longitude}
               color="blue"
               name={restaurant.name}
+              googleId={restaurant.googleId}
             />
           ))}
         </GoogleMapReact>
@@ -49,4 +51,16 @@ class MapDisplay extends React.Component {
   }
 }
 
-export default MapDisplay;
+const stateToProps = ({ omniEatsRestaurants }) => {
+  return {
+    omniEatsRestaurants
+  }
+}
+
+const dispatchToProps = dispatch => {
+  return {
+    allOmniEats: () => dispatch(getAllOmniEats())
+  }
+}
+
+export default connect(stateToProps, dispatchToProps)(MapDisplay);

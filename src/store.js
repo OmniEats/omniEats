@@ -4,13 +4,14 @@ import { googleReducer, getMileRestaurants } from './Reducers/googleReducer';
 import { loginReducer, loginUser, logoutUser } from './Reducers/loginReducer'
 import { userReducer, createUser } from './Reducers/userReducer'
 import { errorReducer, _catchError } from './Reducers/errorReducer'
+import { omniEatsReducer, getAllOmniEats, castVote } from './Reducers/omniEatsReducer';
 
 const reducer = combineReducers({
   googleRestaurants: googleReducer,
   loggedInUser: loginReducer,
   user: userReducer,
-  error: errorReducer
-
+  error: errorReducer,
+  omniEatsRestaurants: omniEatsReducer
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));
@@ -22,5 +23,7 @@ export {
   loginUser,
   logoutUser,
   createUser,
-  _catchError
+  _catchError,
+  getAllOmniEats,
+  castVote
 }
