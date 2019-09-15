@@ -25,8 +25,8 @@ router.post('/rate', async (req, res, next) => {
     })
     const user = await User.findByPk(req.session.userId)
     const allRestaurants = await Restaurant.findAll();
+    rRating.onVote(req.body.vote, user)
     user.addOmniRating(rRating)
-    rRating.onVote(req.body.vote)
     res.send(allRestaurants)
   } catch (ex) {
     next(ex.message);
