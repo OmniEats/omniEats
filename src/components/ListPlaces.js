@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Popup from 'reactjs-popup'
 import MapDisplay from './MapDisplay';
 import { MDBIcon } from 'mdbreact';
 import { getMileRestaurants } from '../store';

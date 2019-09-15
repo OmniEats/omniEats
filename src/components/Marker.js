@@ -2,7 +2,7 @@ import React from 'react';
 import Popup from 'reactjs-popup';
 import Rating from './Rating'
 
-const Marker = ({name, lat, lng, restaurantId, color}) => {
+const Marker = ({name, lat, lng, restaurantId, color, omniRating}) => {
   return (
     <Popup
       trigger={
@@ -16,9 +16,7 @@ const Marker = ({name, lat, lng, restaurantId, color}) => {
     >
       <div>
         <div>{name}</div>
-        <div>lat: {lat}</div>
-        <div>lng: {lng}</div>
-        <div>OmniRating: { }</div>
+        <div>OmniRating:{omniRating}</div>
         <Rating restaurantId={restaurantId} />
       </div>
     </Popup>

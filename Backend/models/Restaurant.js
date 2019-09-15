@@ -22,7 +22,8 @@ const Restaurant = db.define('restaurant', {
   longitude: {
     type: Sequelize.DECIMAL,
     allowNull: false
-  }
+  },
+  imgRef: Sequelize.ARRAY(Sequelize.STRING)
 });
 
 module.exports = Restaurant;

@@ -22,7 +22,8 @@ router.post('/', (req, res, next) => {
               name: place.name,
               googleId: place.id,
               latitude: place.geometry.location.lat,
-              longitude: place.geometry.location.lng
+              longitude: place.geometry.location.lng,
+              imgRef: place.photos.map(photo => photo.photo_reference)
           }
         })
       });
@@ -30,5 +31,8 @@ router.post('/', (req, res, next) => {
     })
     .catch(err => console.error(err));
 });
+
+
+
 
 module.exports = router;

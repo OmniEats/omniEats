@@ -4,7 +4,7 @@ const { Restaurant, OmniRating, User } = models;
 
 router.get('/', async (req, res, next) => {
   try {
-    const allRestaurants = await Restaurant.findAll();
+    const allRestaurants = await Restaurant.findAll({include: [{model: OmniRating}]});
     res.send(allRestaurants);
   } catch (ex) {
     next(ex);
@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/rate', async (req, res, next) => {
   try {
-    const restaurantRating = await OmniRating.findOrCreate({
+   await OmniRating.findOrCreate({
       where: {
         restaurantId: req.body.restaurantId
       }
@@ -25,7 +25,6 @@ router.post('/rate', async (req, res, next) => {
     })
     const user = await User.findByPk(req.session.userId)
     const allRestaurants = await Restaurant.findAll();
-    console.log(restaurantRating)
     user.addOmniRating(rRating)
     rRating.onVote(req.body.vote)
     res.send(allRestaurants)

@@ -34,8 +34,10 @@ class MapDisplay extends React.Component {
           defaultCenter={center}
           defaultZoom={zoom}
         >
-          {omniEatsRestaurants.map(restaurant => (
-            <Marker
+          {omniEatsRestaurants.map(restaurant => {
+
+           return (
+           <Marker
               restaurantId={restaurant.id}
               key={restaurant.id}
               lat={restaurant.latitude}
@@ -43,8 +45,9 @@ class MapDisplay extends React.Component {
               color="blue"
               name={restaurant.name}
               googleId={restaurant.googleId}
+              omniRating={restaurant.omniRating ? restaurant.omniRating.rating : 'No Votes Yet'}
             />
-          ))}
+          )})}
         </GoogleMapReact>
       </div>
     );
