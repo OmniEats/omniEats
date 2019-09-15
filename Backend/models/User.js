@@ -15,6 +15,7 @@ const User = db.define('user', {
   lastName: {
     type: Sequelize.STRING
   },
+  fullName: Sequelize.STRING,
   email: {
     type: Sequelize.STRING,
     unique: true,
@@ -40,10 +41,12 @@ function hashPassword(password) {
 
 User.beforeCreate(userInstance => {
   userInstance.password = hashPassword(userInstance.password);
+  userInstance.fullName = userInstance.firstName + " " + userInstance.lastName
 });
 
 User.beforeUpdate(userInstance => {
   userInstance.password = hashPassword(userInstance.password);
+  userInstance.fullName = userInstance.firstName + " " + userInstance.lastName;
 });
 
 User.verifyPassword = function(user, password) {
@@ -54,3 +57,4 @@ module.exports = {
   User,
   hashPassword
 };
+

@@ -24,6 +24,10 @@ class MapDisplay extends React.Component {
     this.props.allOmniEats();
   }
 
+  componentWillUnmount() {
+    this.props.allOmniEats();
+  }
+
   render() {
     const { omniEatsRestaurants, center, zoom } = this.props;
     return (
@@ -49,7 +53,17 @@ class MapDisplay extends React.Component {
                 key={restaurant.id}
                 lat={restaurant.latitude}
                 lng={restaurant.longitude}
-                color="blue"
+                color={
+                  !restaurant.omniRating
+                    ? 'blue'
+                    : restaurant.omniRating.rating === 'Meat Lovers'
+                    ? 'red'
+                    : restaurant.omniRating.rating === 'Half-Half'
+                    ? 'yellow'
+                    : restaurant.omniRating.rating === 'Vegetarian'
+                    ? 'green'
+                    : 'blue'
+                }
                 name={restaurant.name}
                 googleId={restaurant.googleId}
                 omniRating={

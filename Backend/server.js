@@ -39,7 +39,8 @@ app.get('/login', async (req, res, next) => {
       const user = await User.findOne({
         where: {
           id: req.session.userId
-        }
+        },
+        attributes: ['id', 'fullName']
       })
       res.send(user);
     }
