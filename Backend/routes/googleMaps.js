@@ -32,7 +32,13 @@ router.post('/', (req, res, next) => {
     .catch(err => console.error(err));
 });
 
+router.post('/photos', (req, res, next) => {
+  googleMaps
+  .placesPhoto({photoreference: req.body.photoreference})
+  .asPromise()
+  .then(result => console.log(result))
+  .catch(err => console.error(err.message))
+})
 
 
-
-module.exports = router;
+module.exports = router
