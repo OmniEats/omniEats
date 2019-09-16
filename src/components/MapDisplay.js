@@ -33,8 +33,8 @@ class MapDisplay extends React.Component {
     return (
       <div
         style={{
-          position: 'absolute',
           height: '100vh',
+          minWidth: 1198,
           width: '100%',
           marginTop: 25
         }}

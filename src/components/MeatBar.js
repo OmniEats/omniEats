@@ -2,7 +2,7 @@ import React from "react";
 
 function MeatBar ({ match }) {
   return (
-    <div style={{marginTop: 90}}>
+    <div style={{marginTop: 90, width: 800}}>
       <ul style={{color: '#fff', display: 'block'}}>
         <li>Meat 1</li>
         <br />
