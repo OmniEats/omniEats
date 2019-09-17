@@ -29,7 +29,7 @@ class MapDisplay extends React.Component {
   }
 
   render() {
-    const { omniEatsRestaurants, center, zoom } = this.props;
+    const { omniEatsRestaurants, center, zoom, imgRef } = this.props;    
     return (
       <div
         style={{
@@ -70,7 +70,8 @@ class MapDisplay extends React.Component {
                   restaurant.omniRating
                     ? restaurant.omniRating.rating
                     : 'No Votes Yet'
-                }
+                  }
+                  imgRef={restaurant.imgRef}
               />
             );
           })}
