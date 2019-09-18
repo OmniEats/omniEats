@@ -12,24 +12,24 @@ class MapDisplay extends React.Component {
   componentDidUpdate(prevProps) {
     if (
       prevProps.center.lat !== this.props.center.lat ||
-      prevProps.center.lat !== this.props.center.lat
+      prevProps.center.lng !== this.props.center.lng
     ) {
       this.props.getUserLocation();
-      this.props.allOmniEats();
+      this.props.allOmniEats([]);
     }
   }
 
   componentDidMount() {
     this.props.getUserLocation();
-    this.props.allOmniEats();
+    this.props.allOmniEats([]);
   }
 
   componentWillUnmount() {
-    this.props.allOmniEats();
+    this.props.allOmniEats([]);
   }
 
   render() {
-    const { omniEatsRestaurants, center, zoom, imgRef } = this.props;    
+    const { omniEatsRestaurants, center, zoom } = this.props;
     return (
       <div
         style={{
@@ -91,7 +91,7 @@ const stateToProps = ({ omniEatsRestaurants, userLocation }) => {
 
 const dispatchToProps = dispatch => {
   return {
-    allOmniEats: () => dispatch(getAllOmniEats()),
+    allOmniEats: filter => dispatch(getAllOmniEats(filter)),
     getUserLocation: () => dispatch(currentLocation())
   };
 };

@@ -10,7 +10,7 @@ class App extends React.Component {
     return (
       <Router>
         <NavBar />
-        <Route path="/" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route path="/login"component={MainLogin} />
       </Router>
     );
