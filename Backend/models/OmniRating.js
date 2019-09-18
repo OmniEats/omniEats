@@ -18,7 +18,8 @@ const OmniRating = db.define("omniRating", {
   totalScore: {
     type: Sequelize.INTEGER,
     defaultValue: 0
-  }
+  },
+  avgScore: Sequelize.DECIMAL
 });
 
 OmniRating.prototype.onVote = async function(vote, user) {
@@ -31,6 +32,7 @@ OmniRating.prototype.onVote = async function(vote, user) {
     this.totalScore--;
   }
   const avgScore = this.totalScore / this.ratingsCount;
+  this.avgScore = avgScore
   if (avgScore >= 0.33) {
     this.rating = "Meat Lovers";
   }
