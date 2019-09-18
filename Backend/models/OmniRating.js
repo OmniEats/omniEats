@@ -34,6 +34,7 @@ OmniRating.prototype.onVote = async function(vote, user) {
   if (avgScore >= 0.33) {
     this.rating = "Meat Lovers";
   }
+
   if (avgScore <= -0.33) {
     this.rating = "Vegetarian";
   }

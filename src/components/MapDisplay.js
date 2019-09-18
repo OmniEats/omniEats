@@ -9,27 +9,34 @@ class MapDisplay extends React.Component {
     super(props);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, ) {
+    const {filters} = this.props
+    console.log(prevProps)
     if (
       prevProps.center.lat !== this.props.center.lat ||
-      prevProps.center.lng !== this.props.center.lng
+      prevProps.center.lng !== this.props.center.lng ||
+      prevProps.filters.length !== this.props.filters.length
     ) {
       this.props.getUserLocation();
-      this.props.allOmniEats([]);
+      this.props.allOmniEats(filters);
     }
   }
 
   componentDidMount() {
+    const { filters } = this.props
     this.props.getUserLocation();
-    this.props.allOmniEats([]);
+    this.props.allOmniEats(filters);
   }
 
   componentWillUnmount() {
-    this.props.allOmniEats([]);
+    const { filters } = this.props
+    this.props.allOmniEats(filters);
   }
 
   render() {
+    const { filters } = this.props
     const { omniEatsRestaurants, center, zoom } = this.props;
+    console.log(filters)
     return (
       <div
         style={{
@@ -81,11 +88,12 @@ class MapDisplay extends React.Component {
   }
 }
 
-const stateToProps = ({ omniEatsRestaurants, userLocation }) => {
+const stateToProps = ({ omniEatsRestaurants, userLocation, filters }) => {
   return {
     omniEatsRestaurants,
     center: userLocation,
-    zoom: 15
+    zoom: 15,
+    filters
   };
 };
 
