@@ -2,10 +2,22 @@ const router = require('express').Router();
 const { models } = require('../index');
 const { Restaurant, OmniRating, User } = models;
 
-router.get('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
+    if (req.body.filter.length <= 0) {
     const allRestaurants = await Restaurant.findAll({include: [{model: OmniRating}]});
     res.send(allRestaurants);
+    } else {
+    const allRestaurants = await Restaurant.findAll({include: [{
+        model: OmniRating,
+        where: {
+          rating: req.body.filter
+        }
+      }]})
+      res.send(allRestaurants);
+    }
+
+
   } catch (ex) {
     next(ex);
   }

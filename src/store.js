@@ -6,6 +6,7 @@ import { userReducer, createUser } from './Reducers/userReducer'
 import { errorReducer, _catchError } from './Reducers/errorReducer'
 import { omniEatsReducer, getAllOmniEats, castVote } from './Reducers/omniEatsReducer';
 import { userLocationReducer, currentLocation } from './Reducers/userLocationReducer';
+import { filterReducer, addorRemoveFilter } from './Reducers/filterReducer';
 
 const reducer = combineReducers({
   googleRestaurants: googleReducer,
@@ -13,7 +14,8 @@ const reducer = combineReducers({
   user: userReducer,
   error: errorReducer,
   omniEatsRestaurants: omniEatsReducer,
-  userLocation: userLocationReducer
+  userLocation: userLocationReducer,
+  filters: filterReducer
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));
@@ -28,5 +30,6 @@ export {
   _catchError,
   getAllOmniEats,
   castVote,
-  currentLocation
+  currentLocation,
+  addorRemoveFilter
 }

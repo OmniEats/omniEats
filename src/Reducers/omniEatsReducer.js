@@ -9,9 +9,9 @@ const _getAllOmniEats = restaurants => {
   };
 };
 
-export const getAllOmniEats = () => {
+export const getAllOmniEats = (filter) => {
   return async dispatch => {
-    const response = await axios.get('/api/omniEats');
+    const response = await axios.post('/api/omniEats', {filter});
     const omniEatsRestaurants = response.data;
     dispatch(_getAllOmniEats(omniEatsRestaurants));
   };
