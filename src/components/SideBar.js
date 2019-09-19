@@ -5,35 +5,31 @@ import { addorRemoveFilter } from '../Reducers/filterReducer';
 
 function SideBar({ setFilter }) {
   return (
-    <div style={{ marginTop: 90, width: 162 }}>
-      Categories
-      <br />
-      <NavLink to="/meat">Meat</NavLink>
-      <br />
-      <NavLink to="/mixed">Mixed</NavLink>
-      <br />
-      <NavLink to="/veggie">Veggie</NavLink>
+    <div className="category-container" style={{width: 162, color: '#fff'}}>
+      <div style={{fontWeight: 'bold', fontSize: 20, marginBottom: 20}}>Categories</div>
       <label htmlFor="meatyCheck">
         Meat Lovers:
-        <input
+        <input style={{position: 'absolute', left: 125}}
           type="checkbox"
           id="meatyCheck"
           name="meatyCheck"
           onChange={() => setFilter()}
         />
       </label>
+      <br />
       <label htmlFor="halfyCheck">
         Half-Half:
-        <input
+        <input style={{position: 'absolute', left: 125}}
           type="checkbox"
           id="halfCheck"
           name="halfCheck"
           onChange={() => setFilter()}
         />
       </label>
+      <br />
       <label htmlFor="veggyCheck">
         Vegetarian:
-        <input
+        <input style={{position: 'absolute', left: 125}}
           type="checkbox"
           id="veggyCheck"
           name="veggyCheck"
