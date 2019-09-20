@@ -45,8 +45,8 @@ function NavBar({ loggedInUser, logout }) {
                             </NavLink>
                         </li>
                         <li>
-                          <NavLink className="navlink" exact to="/other">
-                            Other
+                          <NavLink className="navlink" exact to="/fav">
+                            Favorites
                             </NavLink>
                         </li>
                         <li>

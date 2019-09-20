@@ -7,8 +7,14 @@ import { getAllOmniEats, currentLocation } from '../store';
 class MapDisplay extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      heatmapToggle: true,
+  		heatmapCoords: [
+		  		{lat: 0, lng: 0},
+					{lat: 0, lng: 0}
+				]
+  	}
   }
-
   componentDidUpdate(prevProps, ) {
     const {filters} = this.props
     console.log(prevProps)
@@ -21,26 +27,56 @@ class MapDisplay extends React.Component {
       this.props.allOmniEats(filters);
     }
   }
-
   componentDidMount() {
     const { filters } = this.props
     this.props.getUserLocation();
     this.props.allOmniEats(filters);
   }
-
   componentWillUnmount() {
     const { filters } = this.props
     this.props.allOmniEats(filters);
   }
-
+  onMapClick({x, y, lat, lng, event}) {
+    if (!this.state.heatmapToggle) {
+      return
+    }
+  	this.setState({
+  		heatmapCoords: [ ...this.state.heatmapCoords, {lat, lng}]
+  	})
+    if (this._googleMap !== undefined) {      
+      const point = new google.maps.LatLng(lat, lng)
+      this._googleMap.heatmap.data.push(point)
+    }
+  }
+  toggleHeatMap() {    
+    this.setState({
+      heatmapToggle: !this.state.heatmapToggle
+    }, () => {
+      if (this._googleMap !== undefined) {
+        this._googleMap.heatmap.setMap(this.state.heatmapToggle ? this._googleMap.map_ : null)
+      }      
+    })
+  }
   render() {
     const { filters } = this.props
     const { omniEatsRestaurants, center, zoom } = this.props;
-    console.log(filters)
+    console.log(filters);
+    const data = omniEatsRestaurants.map(restaurant => ({
+      lat: restaurant.latitude,
+      lng: restaurant.longitude,
+      weight: restaurant.grating 
+    }));
+    const heatmapData = {
+      positions: data,
+      options: {
+        radius: 80,
+        opacity: 0.8
+      },
+    };
     return (
       <div
         style={{
-          height: '100vh',
+          height: '85vh',
           minWidth: 1198,
           width: '100%',
           marginTop: 85,
@@ -48,11 +84,17 @@ class MapDisplay extends React.Component {
         }}
       >
         <GoogleMapReact
+          ref={(el) => this._googleMap = el}
           bootstrapURLKeys={{
-            key: process.env.MAPKEY || 'AIzaSyA50mDPBaEgfNWestAu7oPjFK85h1rhE88'
+            key:
+              process.env.MAPKEY || 'AIzaSyA50mDPBaEgfNWestAu7oPjFK85h1rhE88',
+            libraries: ['visualization']
           }}
           defaultCenter={center}
           defaultZoom={zoom}
+          heatmapLibrary={true}
+          heatmap={heatmapData}
+          onClick={this.onMapClick.bind(this)}
         >
           {omniEatsRestaurants.map(restaurant => {
             return (
@@ -78,12 +120,16 @@ class MapDisplay extends React.Component {
                   restaurant.omniRating
                     ? restaurant.omniRating.rating
                     : 'No Votes Yet'
-                  }
-                  imgRef={restaurant.imgRef}
+                }
+                imgRef={restaurant.imgRef}
+                grating={restaurant.grating}
+                gUserRatingsTotal={restaurant.gUserRatingsTotal}
+                hours={restaurant.hours}
               />
             );
           })}
         </GoogleMapReact>
+        <button onClick={this.toggleHeatMap.bind(this)}>Toggle Heatmap</button>
       </div>
     );
   }
