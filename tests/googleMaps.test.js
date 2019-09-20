@@ -1,6 +1,7 @@
 require('@babel/polyfill');
 
 const request = require('supertest');
+const { db } = require('../Backend/index')
 
 const app = require('../Backend/server');
 beforeAll(() => db.sync({force: true}));
