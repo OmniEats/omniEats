@@ -36,14 +36,11 @@ router.post('/', (req, res, next) => {
 });
 
 router.post('/directions', (req, res, next) => {
-  const { latitude, longitude, destination } = req.body;
-  const location = { latitude, longitude };
-
+  const { origin, destination } = req.body;
   googleMaps
-    .directions({ origin: location, destination })
+    .directions({ origin, destination })
     .asPromise()
-    .then(results => {console.log(results)
-    res.send(results)})
+    .then(results => console.log(results))
     .catch(err => console.error(err))
 });
 

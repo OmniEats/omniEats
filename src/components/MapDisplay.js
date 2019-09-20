@@ -35,6 +35,7 @@ class MapDisplay extends React.Component {
   componentWillUnmount() {
     const { filters } = this.props
     this.props.allOmniEats(filters);
+    this.props.getUserLocation();
   }
   onMapClick({x, y, lat, lng, event}) {
     if (!this.state.heatmapToggle) {
@@ -140,7 +141,8 @@ const stateToProps = ({ omniEatsRestaurants, userLocation, filters }) => {
     omniEatsRestaurants,
     center: userLocation,
     zoom: 15,
-    filters
+    filters,
+  
   };
 };
 
