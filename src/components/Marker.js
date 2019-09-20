@@ -4,7 +4,7 @@ import Rating from './Rating'
 import { connect } from 'react-redux'
 
 const Marker = ({name, restaurantId, color, omniRating, imgRef, loggedInUser, hours, grating, gUserRatingsTotal}) => {
-  let currentImg = "https://maps.googleapis.com/maps/api/place/photo?photoreference=" + imgRef + "&sensor=false&maxheight=500&maxwidth=500&key=" + (process.env.MAPKEY || "AIzaSyA50mDPBaEgfNWestAu7oPjFK85h1rhE88")
+  let currentImg = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${imgRef}&sensor=false&maxheight=500&maxwidth=500&key=AIzaSyBP8sgCR137j4KQuKiBB-3e8qKmkky3JMk` 
   return (
     <Popup
       trigger={
@@ -16,7 +16,7 @@ const Marker = ({name, restaurantId, color, omniRating, imgRef, loggedInUser, ho
         </div>
       }
       on='hover'
-      mouseLeaveDelay={5000}
+      mouseLeaveDelay={200}
     >
       <div style={{alignContent:"center", backgroundColor: 'black', color: 'white'}}>
         <div style={{ fontSize: 16 }}>{name}</div>
