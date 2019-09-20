@@ -30,6 +30,7 @@ function NavBar({ loggedInUser, logout }) {
                         </a>
                       {loggedInUser.fullName ? <h2 style={{ color: 'white' }}>Welcome {loggedInUser.fullName}</h2> : ''}
                       <div className="ul-contents">
+                        
                         <li>
                           <NavLink className="navlink" exact to="/">
                             Home

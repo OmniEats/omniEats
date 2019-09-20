@@ -19,20 +19,32 @@ router.post('/', (req, res, next) => {
             googleId: place.id
           },
           defaults: {
-              name: place.name,
-              googleId: place.id,
-              latitude: place.geometry.location.lat,
-              longitude: place.geometry.location.lng,
-              imgRef: place.photos.map(photo => photo.photo_reference),
-              grating: place.rating,
-              gUserRatingsTotal: place.user_ratings_total,
-              hours: place.opening_hours.open_now
+            name: place.name,
+            googleId: place.id,
+            latitude: place.geometry.location.lat,
+            longitude: place.geometry.location.lng,
+            imgRef: place.photos.map(photo => photo.photo_reference),
+            grating: place.rating,
+            gUserRatingsTotal: place.user_ratings_total,
+            hours: place.opening_hours.open_now
           }
-        })
+        });
       });
       res.send(results.json.results);
     })
     .catch(err => console.error(err));
 });
 
-module.exports = router
+router.post('/directions', (req, res, next) => {
+  const { latitude, longitude, destination } = req.body;
+  const location = { latitude, longitude };
+
+  googleMaps
+    .directions({ origin: location, destination })
+    .asPromise()
+    .then(results => {console.log(results)
+    res.send(results)})
+    .catch(err => console.error(err))
+});
+
+module.exports = router;
