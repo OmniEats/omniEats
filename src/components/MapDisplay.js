@@ -35,6 +35,7 @@ class MapDisplay extends React.Component {
   componentWillUnmount() {
     const { filters } = this.props
     this.props.allOmniEats(filters);
+    this.props.getUserLocation();
   }
   onMapClick({x, y, lat, lng, event}) {
     if (!this.state.heatmapToggle) {
@@ -87,7 +88,7 @@ class MapDisplay extends React.Component {
           ref={(el) => this._googleMap = el}
           bootstrapURLKeys={{
             key:
-              process.env.MAPKEY || 'AIzaSyA50mDPBaEgfNWestAu7oPjFK85h1rhE88',
+              process.env.MAPKEY || 'AIzaSyBP8sgCR137j4KQuKiBB-3e8qKmkky3JMk',
             libraries: ['visualization']
           }}
           defaultCenter={center}
@@ -140,7 +141,8 @@ const stateToProps = ({ omniEatsRestaurants, userLocation, filters }) => {
     omniEatsRestaurants,
     center: userLocation,
     zoom: 15,
-    filters
+    filters,
+  
   };
 };
 

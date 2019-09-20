@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { googleReducer, getMileRestaurants } from './Reducers/googleReducer';
+import { googleReducer, getMileRestaurants, getDirections } from './Reducers/googleReducer';
 import { loginReducer, loginUser, logoutUser } from './Reducers/loginReducer'
 import { userReducer, createUser } from './Reducers/userReducer'
 import { errorReducer, _catchError } from './Reducers/errorReducer'
@@ -31,5 +31,6 @@ export {
   getAllOmniEats,
   castVote,
   currentLocation,
-  addorRemoveFilter
+  addorRemoveFilter,
+  getDirections
 }

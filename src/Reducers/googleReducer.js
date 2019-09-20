@@ -22,6 +22,17 @@ export const getMileRestaurants = (userLocation) => {
   }
 }
 
+export const getDirections = (origin, destination) => {
+  return async dispatch => {
+    try {
+      const response = await axios.post('/api/google/directions', {origin, destination})
+      console.log(response.data)
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
+}
+
 export const googleReducer = (state = [], action) => {
   switch (action.type) {
     case GET_MILE_RESTAURANTS:

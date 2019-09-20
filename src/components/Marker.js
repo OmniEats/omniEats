@@ -2,9 +2,11 @@ import React from 'react';
 import Popup from 'reactjs-popup';
 import Rating from './Rating'
 import { connect } from 'react-redux'
+import { getDirections } from '../store';
 
-const Marker = ({name, restaurantId, color, omniRating, imgRef, loggedInUser, hours, grating, gUserRatingsTotal}) => {
-  let currentImg = "https://maps.googleapis.com/maps/api/place/photo?photoreference=" + imgRef + "&sensor=false&maxheight=500&maxwidth=500&key=" + (process.env.MAPKEY || "AIzaSyA50mDPBaEgfNWestAu7oPjFK85h1rhE88")
+const Marker = ({name, restaurantId, color, omniRating, imgRef, loggedInUser, hours, grating, gUserRatingsTotal, loadDirections, lat, lng, userlocation}) => {
+  const key = process.env.MAPKEY || 'AIzaSyBP8sgCR137j4KQuKiBB-3e8qKmkky3JMk'
+  let currentImg = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${imgRef}&sensor=false&maxheight=500&maxwidth=500&key=${key}` 
   return (
     <Popup
       trigger={
@@ -16,7 +18,7 @@ const Marker = ({name, restaurantId, color, omniRating, imgRef, loggedInUser, ho
         </div>
       }
       on='hover'
-      mouseLeaveDelay={2000}
+      mouseLeaveDelay={200}
     >
       <div style={{alignContent:"center", backgroundColor: 'black', color: 'white'}}>
         <div style={{ fontSize: 16 }}>{name}</div>
@@ -25,6 +27,7 @@ const Marker = ({name, restaurantId, color, omniRating, imgRef, loggedInUser, ho
         <div style={{ fontSize: 14, color: 'lightgrey' }}>Google Rating: {grating} ({gUserRatingsTotal})</div>
         <div>OmniRating:{omniRating}</div>
         <div style={{ cursor: 'pointer' }}><Rating restaurantId={restaurantId} /></div>
+        <div><button type='button' onClick={() => loadDirections(userlocation, {lat, lng})}></button></div>
         <div>{!loggedInUser.id && <div style={{ color: "white"}}>Must Log In to Rate Restaurant</div>}</div>
         <Popup
             trigger={<img width='188' height='188' src={currentImg} />}
@@ -38,10 +41,17 @@ const Marker = ({name, restaurantId, color, omniRating, imgRef, loggedInUser, ho
   );
 };
 
-const stateToProps = ({loggedInUser}) => {
+const stateToProps = ({ loggedInUser, userlocation }) => {
   return {
-    loggedInUser
+    loggedInUser,
+    userlocation
   }
 }
 
-export default connect(stateToProps)(Marker);
+const dispatchToProps = dispatch => {
+  return {
+    loadDirections: (origin, destination) => dispatch(getDirections(origin, destination))
+  }
+}
+
+export default connect(stateToProps, dispatchToProps)(Marker);
