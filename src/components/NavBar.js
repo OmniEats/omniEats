@@ -9,7 +9,7 @@ function NavBar({ loggedInUser, logout }) {
   return (
     <header id="nav-bar" className="site-header">
       <div className="header-container header-main">
-        <div className="site-logo">
+        <div className="site-logo" style={{width: 162, justifyContent: 'center'}}>
           <a href="/" title="OmniEats">
             <img
               src={images.logo}

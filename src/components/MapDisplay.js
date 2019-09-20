@@ -79,7 +79,8 @@ class MapDisplay extends React.Component {
           height: '85vh',
           minWidth: 1198,
           width: '100%',
-          marginTop: 85
+          marginTop: 85,
+          marginLeft: 162
         }}
       >
         <GoogleMapReact

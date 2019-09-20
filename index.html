@@ -101,7 +101,6 @@
       font-family: Roboto;
       font-weight: 700;
       font-style: normal;
-      background: #825bae;
       vertical-align: top;
       max-width: 100%;
       -moz-border-radius: 5px;
@@ -127,13 +126,16 @@
 
     .ul-drop {
       height: 82px;
+      justify-content: flex-end;
     }
 
     .header-title {
+      position: absolute;
+      left: 180px;
       display: flex;
       justify-content: flex-start;
       align-content: left;
-      width: 725px;
+      width: 150px;
       color: #fff;
       font-weight: bold;
       padding: 7px;
@@ -173,23 +175,61 @@
     }
 
     .marker {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 18px;
-    height: 18px;
-    background-color: #000;
-    border: 2px solid #fff;
-    border-radius: 100%;
-    user-select: none;
-    transform: translate(-50%, -50%);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 18px;
+      background-color: #000;
+      border: 2px solid #fff;
+      border-radius: 100%;
+      user-select: none;
+      transform: translate(-50%, -50%);
     }
+
     #homeContainer {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-content: center;
       align-items: center;
+    }
+
+    .category-container {
+      position: fixed;
+      top: 82px;
+      bottom: 0;
+      left: 0;
+      width: 81px;
+      background: #504d54;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-perspective: 1000;
+      -moz-perspective: 1000;
+      -ms-perspective: 1000;
+      perspective: 1000;
+      -moz-transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+      transform: translateZ(0);
+      -moz-transform: translate3d(0, 0, 0);
+      -webkit-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      -moz-box-shadow: 81px 0px 0px 0px #48464c inset;
+      -webkit-box-shadow: 81px 0px 0px 0px #48464c inset;
+      box-shadow: 100px 0px 0px 0px #48464c inset;
+      -moz-transition: width 0.4s;
+      -webkit-transition: width 0.4s;
+      transition: width 0.4s;
+      z-index: 10000;
+      overflow: hidden;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-drag: none;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
   </style>
 </head>
