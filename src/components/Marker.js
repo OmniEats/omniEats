@@ -16,7 +16,7 @@ const Marker = ({name, restaurantId, color, omniRating, imgRef, loggedInUser, ho
         </div>
       }
       on='hover'
-      mouseLeaveDelay={5000}
+      mouseLeaveDelay={2000}
     >
       <div style={{alignContent:"center", backgroundColor: 'black', color: 'white'}}>
         <div style={{ fontSize: 16 }}>{name}</div>
