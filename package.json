@@ -7,7 +7,7 @@
     "seed": "node Backend/seed.js",
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --watch --mode=development",
-    "test": "node Backend/seed.js & jest",
+    "test": "jest",
     "start:dev": "npm run webpack:dev & nodemon ./Backend/app.js --ignore dist --ignore src",
     "build": "npm run webpack",
     "start": "node Backend/app.js"

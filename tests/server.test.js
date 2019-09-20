@@ -20,7 +20,6 @@ describe('test route', function() {
         } else {
           expect(text).toBeTruthy();
           expect(text).toBe('sucessful');
-          done();
         }
       });
   });
