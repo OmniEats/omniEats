@@ -23,7 +23,14 @@ const Restaurant = db.define('restaurant', {
     type: Sequelize.DECIMAL,
     allowNull: false
   },
-  imgRef: Sequelize.ARRAY(Sequelize.STRING)
+  imgRef: Sequelize.ARRAY(Sequelize.STRING),
+  grating: {
+    type: Sequelize.DECIMAL
+  },
+  gUserRatingsTotal: {
+    type: Sequelize.DECIMAL
+  },
+  hours: {type: Sequelize.BOOLEAN}
 });
 
 module.exports = Restaurant;
