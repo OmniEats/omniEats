@@ -2,10 +2,11 @@ require('@babel/polyfill');
 
 const request = require('supertest');
 const { db } = require('../Backend/index')
-
 const app = require('../Backend/server');
+
 beforeAll(() => db.sync({force: true}));
 afterAll(() => db.close());
+
 describe('test google maps loads from /api/googleMaps', function () {
   test('post/api/googleMaps should send back data', done => {
     request(app)
