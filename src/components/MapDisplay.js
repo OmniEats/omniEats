@@ -2,6 +2,7 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
 import Marker from './Marker';
+import UserMarker from './UserMarker';
 import { getAllOmniEats, currentLocation } from '../store';
 
 class MapDisplay extends React.Component {
@@ -43,18 +44,18 @@ class MapDisplay extends React.Component {
   	this.setState({
   		heatmapCoords: [ ...this.state.heatmapCoords, {lat, lng}]
   	})
-    if (this._googleMap !== undefined) {      
+    if (this._googleMap !== undefined) {
       const point = new google.maps.LatLng(lat, lng)
       this._googleMap.heatmap.data.push(point)
     }
   }
-  toggleHeatMap() {    
+  toggleHeatMap() {
     this.setState({
       heatmapToggle: !this.state.heatmapToggle
     }, () => {
       if (this._googleMap !== undefined) {
         this._googleMap.heatmap.setMap(this.state.heatmapToggle ? this._googleMap.map_ : null)
-      }      
+      }
     })
   }
   render() {
@@ -64,7 +65,7 @@ class MapDisplay extends React.Component {
     const data = omniEatsRestaurants.map(restaurant => ({
       lat: restaurant.latitude,
       lng: restaurant.longitude,
-      weight: restaurant.grating 
+      weight: restaurant.grating
     }));
     const heatmapData = {
       positions: data,
@@ -96,6 +97,7 @@ class MapDisplay extends React.Component {
           heatmap={heatmapData}
           onClick={this.onMapClick.bind(this)}
         >
+          <UserMarker lat={center.lat} lng={center.lng} />
           {omniEatsRestaurants.map(restaurant => {
             return (
               <Marker
