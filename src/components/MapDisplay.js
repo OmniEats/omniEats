@@ -19,11 +19,10 @@ class MapDisplay extends React.Component {
   }
   componentDidUpdate(prevProps) {
     const { filters, directions } = this.props;
-    const { gDirections } = this.state
     if (prevProps.filters.length !== filters.length) {
       this.props.allOmniEats(filters);
     }
-    if (Object.keys(prevProps.directions).length !== Object.keys(directions).length || prevProps.directions.origin !== directions.origin) {
+    if (Object.keys(prevProps.directions).length !== Object.keys(directions).length || prevProps.directions.origin !== directions.origin || prevProps.directions.destination !== directions.destination) {
       this.setState({gDirections: directions.query})
     }
   }
@@ -152,7 +151,6 @@ class MapDisplay extends React.Component {
                 grating={restaurant.grating}
                 gUserRatingsTotal={restaurant.gUserRatingsTotal}
                 hours={restaurant.hours}
-                apiIsLoaded={apiIsLoaded}
               />
             );
           })}
