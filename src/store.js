@@ -1,12 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { googleReducer, getMileRestaurants, getDirections } from './Reducers/googleReducer';
+import { googleReducer, getMileRestaurants } from './Reducers/googleReducer';
 import { loginReducer, loginUser, logoutUser } from './Reducers/loginReducer'
 import { userReducer, createUser } from './Reducers/userReducer'
 import { errorReducer, _catchError } from './Reducers/errorReducer'
 import { omniEatsReducer, getAllOmniEats, castVote } from './Reducers/omniEatsReducer';
 import { userLocationReducer, currentLocation } from './Reducers/userLocationReducer';
 import { filterReducer, addorRemoveFilter } from './Reducers/filterReducer';
+import { directionsReducer, getDirections } from './Reducers/directionsReducer'
 
 const reducer = combineReducers({
   googleRestaurants: googleReducer,
@@ -15,7 +16,8 @@ const reducer = combineReducers({
   error: errorReducer,
   omniEatsRestaurants: omniEatsReducer,
   userLocation: userLocationReducer,
-  filters: filterReducer
+  filters: filterReducer,
+  directions: directionsReducer
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));

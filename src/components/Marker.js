@@ -1,12 +1,26 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
-import Rating from './Rating'
-import { connect } from 'react-redux'
+import Rating from './Rating';
+import { connect } from 'react-redux';
 import { getDirections } from '../store';
 
-const Marker = ({name, restaurantId, color, omniRating, imgRef, loggedInUser, hours, grating, gUserRatingsTotal, loadDirections, lat, lng, userlocation}) => {
-  const key = process.env.MAPKEY || 'AIzaSyBP8sgCR137j4KQuKiBB-3e8qKmkky3JMk'
-  let currentImg = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${imgRef}&sensor=false&maxheight=500&maxwidth=500&key=${key}` 
+const Marker = ({
+  name,
+  restaurantId,
+  color,
+  omniRating,
+  imgRef,
+  loggedInUser,
+  hours,
+  grating,
+  gUserRatingsTotal,
+  loadDirections,
+  lat,
+  lng,
+  userLocation,
+}) => {
+  const key = process.env.MAPKEY || 'AIzaSyBP8sgCR137j4KQuKiBB-3e8qKmkky3JMk';
+  let currentImg = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${imgRef}&sensor=false&maxheight=500&maxwidth=500&key=${key}`;
   return (
     <Popup
       trigger={
@@ -14,44 +28,72 @@ const Marker = ({name, restaurantId, color, omniRating, imgRef, loggedInUser, ho
           className="marker"
           style={{ backgroundColor: color, cursor: 'pointer' }}
           title={name}
-        >
-        </div>
+        ></div>
       }
-      on='hover'
+      on="hover"
       mouseLeaveDelay={200}
     >
-      <div style={{alignContent:"center", backgroundColor: 'black', color: 'white'}}>
+      <div
+        style={{
+          alignContent: 'center',
+          backgroundColor: 'black',
+          color: 'white'
+        }}
+      >
         <div style={{ fontSize: 16 }}>{name}</div>
-        {hours ? <div style={{ fontSize: 14, color: 'green' }}>{'Open'}</div>:
-        <div style={{ fontSize: 13, color: 'red' }}>{'Closed'}</div>}
-        <div style={{ fontSize: 14, color: 'lightgrey' }}>Google Rating: {grating} ({gUserRatingsTotal})</div>
+        {hours ? (
+          <div style={{ fontSize: 14, color: 'green' }}>{'Open'}</div>
+        ) : (
+          <div style={{ fontSize: 13, color: 'red' }}>{'Closed'}</div>
+        )}
+        <div style={{ fontSize: 14, color: 'lightgrey' }}>
+          Google Rating: {grating} ({gUserRatingsTotal})
+        </div>
         <div>OmniRating:{omniRating}</div>
-        <div style={{ cursor: 'pointer' }}><Rating restaurantId={restaurantId} /></div>
-        <div><button type='button' onClick={() => loadDirections(userlocation, {lat, lng})}></button></div>
-        <div>{!loggedInUser.id && <div style={{ color: "white"}}>Must Log In to Rate Restaurant</div>}</div>
+        <div style={{ cursor: 'pointer' }}>
+          <Rating restaurantId={restaurantId} />
+        </div>
+        <div>
+          <button
+            type="button"
+            onClick={() => loadDirections(userLocation, { lat, lng })}
+          >
+            Directions
+          </button>
+        </div>
+        <div>
+          {!loggedInUser.id && (
+            <div style={{ color: 'white' }}>Must Log In to Rate Restaurant</div>
+          )}
+        </div>
         <Popup
-            trigger={<img width='188' height='188' src={currentImg} />}
-            position="right center"
-            on="hover"
+          trigger={<img width="188" height="188" src={currentImg} />}
+          position="right center"
+          on="hover"
         >
-        <img width='500' height='500' src={currentImg} />
+          <img width="500" height="500" src={currentImg} />
         </Popup>
       </div>
     </Popup>
   );
 };
 
-const stateToProps = ({ loggedInUser, userlocation }) => {
+const stateToProps = ({ loggedInUser, userLocation, directions }) => {
   return {
     loggedInUser,
-    userlocation
-  }
-}
+    userLocation,
+    directions
+  };
+};
 
 const dispatchToProps = dispatch => {
   return {
-    loadDirections: (origin, destination) => dispatch(getDirections(origin, destination))
-  }
-}
+    loadDirections: (origin, destination) =>
+      dispatch(getDirections(origin, destination))
+  };
+};
 
-export default connect(stateToProps, dispatchToProps)(Marker);
+export default connect(
+  stateToProps,
+  dispatchToProps
+)(Marker);
