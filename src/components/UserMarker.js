@@ -2,7 +2,7 @@ import React from 'react';
 
 const UserMarker = () => {
   return (
-    <div style={{
+    <div className='user-marker' style={{
       position: 'absolute',
       width: 40,
       height: 40,
