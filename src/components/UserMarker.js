@@ -1,6 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const UserMarker = () => {
+const UserMarker = ({filters}) => {
+  const color = (filters) => {
+     if (filters.includes('Meat Lovers') && !filters.includes('Vegetarian')) {
+      return 'red';
+    } else if (filters.includes('Vegetarian') && !filters.includes('Meat Lovers')) {
+      return 'green';
+    } else if (filters.includes('Half-Half')) {
+      return 'yellow';
+    }
+    return 'white';
+  } 
+
   return (
     <div style={{
       position: 'absolute',
@@ -10,7 +22,7 @@ const UserMarker = () => {
       top: -20 / 2,
       border: '5px solid black',
       borderRadius: 40,
-      backgroundColor: 'white',
+      backgroundColor: color(filters),
       textAlign: 'center',
       color: '#3f51b5',
       fontSize: 16,
@@ -22,4 +34,8 @@ const UserMarker = () => {
   )
 }
 
-export default (UserMarker);
+const mapStateToProps = ({filters}) => {
+  return { filters }
+};
+
+export default connect (mapStateToProps)(UserMarker);

@@ -111,7 +111,7 @@ class MapDisplay extends React.Component {
           defaultCenter={center}
           defaultZoom={zoom}
           yesIWantToUseGoogleMapApiInternals
-          onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}
+          onGoogleApiLoaded={({ map, maps }) => {apiIsLoaded(map, maps)}}
           heatmapLibrary={true}
           heatmap={heatmapData}
           onClick={onMapClick}
