@@ -56,7 +56,9 @@ const Marker = ({
         <div>
           <button
             type="button"
-            onClick={() => loadDirections(userLocation, { lat, lng })}
+            onClick={() => {
+              loadDirections(userLocation, { lat, lng })
+            }}
           >
             Directions
           </button>
