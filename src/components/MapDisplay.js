@@ -5,16 +5,13 @@ import Marker from './Marker';
 import { getAllOmniEats, currentLocation, getDirections } from '../store';
 import UserMarker from './UserMarker';
 
-
 class MapDisplay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      heatmapToggle: true,
-      heatmapCoords: [{ lat: 0, lng: 0 }, { lat: 0, lng: 0 }]
+      heatmapToggle: true
     };
     this.toggleHeatMap = this.toggleHeatMap.bind(this);
-    this.onMapClick = this.onMapClick.bind(this);
   }
   componentDidUpdate(prevProps) {
     const { filters } = this.props;
@@ -26,20 +23,6 @@ class MapDisplay extends React.Component {
     const { filters } = this.props;
     this.props.getUserLocation();
     this.props.allOmniEats(filters);
-
-  }
-
-  onMapClick({ x, y, lat, lng, event }) {
-    if (!this.state.heatmapToggle) {
-      return;
-    }
-    this.setState({
-      heatmapCoords: [...this.state.heatmapCoords, { lat, lng }]
-    });
-    if (this._googleMap !== undefined) {
-      const point = new google.maps.LatLng(lat, lng);
-      this._googleMap.heatmap.data.push(point);
-    }
   }
   toggleHeatMap() {
     this.setState(
@@ -56,9 +39,8 @@ class MapDisplay extends React.Component {
     );
   }
 
-
   render() {
-    const { toggleHeatMap, onMapClick } = this;
+    const { toggleHeatMap } = this;
     const { omniEatsRestaurants, center, zoom, directions } = this.props;
     const data = omniEatsRestaurants.map(restaurant => ({
       lat: restaurant.latitude,
@@ -73,22 +55,22 @@ class MapDisplay extends React.Component {
       }
     };
     const apiIsLoaded = (map, maps) => {
-        console.log(Object.keys(directions).length)
-        const directionService = new maps.DirectionsService();
-        const directionDisplay = new maps.DirectionsRenderer();
-        directionService.route(directions.query, (response, status) => {
-          if (status === 'OK') {
-            directionDisplay.setDirections(response);
-            const routePolyline = new google.maps.Polyline({
-              path: response.routes[0].overview_path
-            })
-            routePolyline.setMap(map)
-          } else {
-            console.log('didnt work')
-            window.alert('Directions request failed to ' + status)
-          }
-        });
-      }
+      console.log(Object.keys(directions).length);
+      const directionService = new maps.DirectionsService();
+      const directionDisplay = new maps.DirectionsRenderer();
+      directionService.route(directions.query, (response, status) => {
+        if (status === 'OK') {
+          directionDisplay.setDirections(response);
+          const routePolyline = new google.maps.Polyline({
+            path: response.routes[0].overview_path
+          });
+          routePolyline.setMap(map);
+        } else {
+          console.log('didnt work');
+          window.alert('Directions request failed to ' + status);
+        }
+      });
+    };
 
     console.log(directions);
     return (
@@ -97,7 +79,7 @@ class MapDisplay extends React.Component {
           height: '85vh',
           minWidth: 1198,
           width: '100%',
-          marginTop: 85,
+          marginTop: 82,
           marginLeft: 162
         }}
       >
@@ -114,7 +96,6 @@ class MapDisplay extends React.Component {
           onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}
           heatmapLibrary={true}
           heatmap={heatmapData}
-          onClick={onMapClick}
         >
           <UserMarker lat={center.lat} lng={center.lng} />
           {omniEatsRestaurants.map(restaurant => {
