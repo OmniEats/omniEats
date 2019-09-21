@@ -6,6 +6,15 @@ const googleMaps = require('@google/maps').createClient({
   key: process.env.MAPKEY
 });
 
+router.post('/directions', (req, res, next) => {
+  const { origin, destination } = req.body;
+  googleMaps
+    .directions({ origin, destination })
+    .asPromise()
+    .then(results => res.send(results))
+    .catch(err => console.error(err))
+});
+
 router.post('/', (req, res, next) => {
   const { latitude, longitude } = req.body;
   const location = { latitude, longitude };
@@ -26,7 +35,7 @@ router.post('/', (req, res, next) => {
             imgRef: place.photos.map(photo => photo.photo_reference),
             grating: place.rating,
             gUserRatingsTotal: place.user_ratings_total,
-            hours: place.opening_hours.open_now
+            hours: place.open_now
           }
         });
       });
@@ -35,13 +44,6 @@ router.post('/', (req, res, next) => {
     .catch(err => console.error(err));
 });
 
-router.post('/directions', (req, res, next) => {
-  const { origin, destination } = req.body;
-  googleMaps
-    .directions({ origin, destination })
-    .asPromise()
-    .then(results => console.log(results))
-    .catch(err => console.error(err))
-});
+
 
 module.exports = router;
