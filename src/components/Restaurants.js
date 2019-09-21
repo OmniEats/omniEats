@@ -12,7 +12,6 @@ const Restaurants = ({
   lng,
   userLocation
 }) => {
-  console.log(omniEatsRestaurants);
   return (
     <div style={{ marginLeft: 162, alignContent: 'center' }}>
       <Sidebar />
