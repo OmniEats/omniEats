@@ -3,6 +3,8 @@ import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
 import Marker from './Marker';
 import { getAllOmniEats, currentLocation, getDirections } from '../store';
+import UserMarker from './UserMarker';
+
 
 class MapDisplay extends React.Component {
   constructor(props) {
@@ -120,6 +122,7 @@ class MapDisplay extends React.Component {
           heatmap={heatmapData}
           onClick={onMapClick}
         >
+          <UserMarker lat={center.lat} lng={center.lng} />
           {omniEatsRestaurants.map(restaurant => {
             return (
               <Marker
