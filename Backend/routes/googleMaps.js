@@ -15,18 +15,6 @@ router.post('/directions', (req, res, next) => {
     .catch(err => console.error(err))
 });
 
-router.post('/photos', (req, res, next) => {
-  const { query } = req.body
-  googleMaps
-  .placesPhoto(query)
-  .asPromise()
-  .then(results => {
-    console.log(results)
-    res.send(results)
-  })
-  .catch(err => console.error(err.message))
-})
-
 router.post('/', (req, res, next) => {
   const { latitude, longitude } = req.body;
   const location = { latitude, longitude };
