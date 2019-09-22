@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import Sidebar from "./SideBar";
 import images from "../assets/images"
 import { logoutUser } from "../store";
+import SliderComp from './SliderComp';
 
 function NavBar({ loggedInUser, logout }) {
   return (
@@ -30,7 +31,7 @@ function NavBar({ loggedInUser, logout }) {
                         </a>
                       {loggedInUser.fullName ? <h2 style={{ color: 'white' }}>Welcome {loggedInUser.fullName}</h2> : ''}
                       <div className="ul-contents">
-                        
+
                         <li>
                           <NavLink className="navlink" exact to="/">
                             Home
@@ -67,6 +68,7 @@ function NavBar({ loggedInUser, logout }) {
                         </li>
                       </div>
                     </ul>
+                    {window.location.hash === '#/' ? <SliderComp /> : ''}
                   </div>
                 </div>
               </nav>

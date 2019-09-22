@@ -44,4 +44,27 @@ router.post('/rate', async (req, res, next) => {
     next(ex.message);
   }
 });
+
+router.post('/slider', async (req, res, next) => {
+  try {
+    const allRestaurants = await Restaurant.findAll({include: {model: OmniRating}});
+    const percent = Object.keys(req.body)[0]*1;
+    const omniRated = allRestaurants.filter(el => (el.dataValues.omniRating));
+    if(percent > 50){
+      const meat = omniRated.filter(el => (el.dataValues.omniRating.dataValues.rating === 'Meat Lovers'));
+      res.send(meat);
+
+    }
+    else if(percent === 50){
+      res.send(allRestaurants);
+    }
+    else{
+      const veggie = omniRated.filter(el => (el.dataValues.omniRating.dataValues.rating === 'Vegetarian'));
+      res.send(veggie);
+    }
+
+  } catch (ex) {
+    next(ex);
+  }
+});
 module.exports = router;
