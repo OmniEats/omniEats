@@ -50,17 +50,26 @@ router.post('/slider', async (req, res, next) => {
     const allRestaurants = await Restaurant.findAll({include: {model: OmniRating}});
     const percent = Object.keys(req.body)[0]*1;
     const omniRated = allRestaurants.filter(el => (el.dataValues.omniRating));
-    if(percent > 50){
-      const meat = omniRated.filter(el => (el.dataValues.omniRating.dataValues.rating === 'Meat Lovers'));
-      res.send(meat);
 
+    const meat = omniRated.filter(el => (el.dataValues.omniRating.dataValues.rating === 'Meat Lovers'));
+    const veggie = omniRated.filter(el => (el.dataValues.omniRating.dataValues.rating === 'Vegetarian'));
+
+    if(percent > 50){
+      if (percent <= 60 && percent > 50) res.send(meat.concat(veggie.filter((el, idx) => (idx < 10))));
+      else if (percent <= 70 && percent > 60) res.send(meat.concat(veggie.filter((el, idx) => (idx < 7))));
+      else if (percent <= 80 && percent > 70) res.send(meat.concat(veggie.filter((el, idx) => (idx < 5))));
+      else if (percent <= 90 && percent > 80) res.send(meat.concat(veggie.filter((el, idx) => (idx < 2))));
+      else res.send(meat);
     }
     else if(percent === 50){
       res.send(allRestaurants);
     }
     else{
-      const veggie = omniRated.filter(el => (el.dataValues.omniRating.dataValues.rating === 'Vegetarian'));
-      res.send(veggie);
+      if (percent < 50 && percent >= 40) res.send(veggie.concat(meat.filter((el, idx) => (idx < 10))));
+      else if (percent < 40 && percent >= 30) res.send(veggie.concat(meat.filter((el, idx) => (idx < 7))));
+      else if (percent < 30 && percent >= 20) res.send(veggie.concat(meat.filter((el, idx) => (idx < 5))));
+      else if (percent < 20 && percent > 10) res.send(veggie.concat(meat.filter((el, idx) => (idx < 2))));
+      else res.send(veggie);
     }
 
   } catch (ex) {
