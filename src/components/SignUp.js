@@ -13,16 +13,23 @@ class SignUp extends React.Component{
       passwordConfirm: '',
     }
     this.onChange = this.onChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   onChange(ev){
     this.setState({[ev.target.name] : ev.target.value});
   }
 
+  handleSubmit() {
+    const {firstName, lastName, email, password} = this.state
+    this.props.handleCreate(firstName, lastName, email, password)
+    window.location.hash = '/'
+  }
+
   render(){
     const {firstName, lastName, email, password, passwordConfirm} = this.state;
-    const {onChange} = this;
-    const {error, handleCreate} = this.props;
+    const {onChange, handleSubmit } = this;
+    const { error } = this.props;
 
     return(
       <div style={{
@@ -30,10 +37,7 @@ class SignUp extends React.Component{
         alignItems: 'top',
         justifyContent: 'top',
         flexDirection: 'column'}}>
-        <form onSubmit={(ev) => {
-          ev.preventDefault()
-          handleCreate(firstName, lastName, email, password)
-        }}>
+        <form >
           <div>
             <label>First Name</label>
             <input type="text" name="firstName" required onChange={onChange}/>
@@ -55,7 +59,10 @@ class SignUp extends React.Component{
             <input type="password" name="passwordConfirm" required onChange={onChange}/>
             {(password !== passwordConfirm) ? <div><font color="red">PASSWORDS DONT MATCH! 🤪</font></div>: ''}
           </div>
-          <input type="submit" disabled={(!firstName || !lastName || !email || !password || !passwordConfirm) ? true : false} />
+          <input type="submit" disabled={(!firstName || !lastName || !email || !password || !passwordConfirm) ? true : false } onClick={(ev) => {
+            ev.preventDefault()
+            handleSubmit()}}
+        />
           <div><font color="red">{(error === 'Account Already Exists') ? `${error} 🧐` : ''}</font></div>
         </form>
       </div>
@@ -72,7 +79,6 @@ const mapStateToProps = ({error})=>{
 const mapDispatchToProps = ( dispatch )=>{
   return {
     handleCreate: function(firstName, lastName, email, password){
-
       dispatch(createUser({
         firstName,
         lastName,
