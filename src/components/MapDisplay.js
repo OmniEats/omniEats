@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Marker from './Marker';
 import { getAllOmniEats, currentLocation, getDirections } from '../store';
 import UserMarker from './UserMarker';
+import SliderComp from './SliderComp'
 
 class MapDisplay extends React.Component {
   constructor(props) {
@@ -88,6 +89,7 @@ class MapDisplay extends React.Component {
           marginLeft: 162
         }}
       >
+        <SliderComp />
         <GoogleMapReact
           ref={el => (this._googleMap = el)}
           bootstrapURLKeys={{

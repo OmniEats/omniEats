@@ -5,7 +5,7 @@ import { getSlider } from '../Reducers/omniEatsReducer';
 import { connect } from 'react-redux';
 
 const stylinBar = {
-  marginBottom: '100px',
+  marginBottom: '1px',
   marginRight: '150px',
   marginLeft: '300px',
   textAlign: 'center',

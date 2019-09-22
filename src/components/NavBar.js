@@ -71,7 +71,6 @@ function NavBar({ loggedInUser, logout }) {
                         </li>
                       </div>
                     </ul>
-                    {window.location.hash === '#/' ? <SliderComp /> : ''}
                   </div>
                 </div>
               </nav>
