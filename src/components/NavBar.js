@@ -1,9 +1,11 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
-import Sidebar from './SideBar';
-import images from '../assets/images';
-import { logoutUser } from '../store';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { connect } from "react-redux"
+import Sidebar from "./SideBar";
+import images from "../assets/images"
+import { logoutUser } from "../store";
+import SliderComp from './SliderComp';
+
 function NavBar({ loggedInUser, logout }) {
   return (
     <header id="nav-bar" className="site-header">
@@ -69,6 +71,7 @@ function NavBar({ loggedInUser, logout }) {
                         </li>
                       </div>
                     </ul>
+                    {window.location.hash === '#/' ? <SliderComp /> : ''}
                   </div>
                 </div>
               </nav>
