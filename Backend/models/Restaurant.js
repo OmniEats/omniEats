@@ -23,7 +23,8 @@ const Restaurant = db.define('restaurant', {
     type: Sequelize.DECIMAL,
     allowNull: false
   },
-  imgRef: Sequelize.ARRAY(Sequelize.STRING),
+  imgRef: Sequelize.TEXT,
+  imgUrl: Sequelize.TEXT,
   grating: {
     type: Sequelize.DECIMAL
   },
@@ -32,5 +33,10 @@ const Restaurant = db.define('restaurant', {
   },
   hours: {type: Sequelize.BOOLEAN}
 });
+
+Restaurant.beforeCreate(restaurantInstance => {
+  restaurantInstance.imgUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&maxHeight=500&photoreference=${restaurantInstance.imgRef}&key=${process.env.MAPKEY}`
+})
+
 
 module.exports = Restaurant;

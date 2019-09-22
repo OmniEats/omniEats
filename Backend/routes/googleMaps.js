@@ -32,7 +32,7 @@ router.post('/', (req, res, next) => {
             googleId: place.id,
             latitude: place.geometry.location.lat,
             longitude: place.geometry.location.lng,
-            imgRef: place.photos.map(photo => photo.photo_reference),
+            imgRef: place.photos[0].photo_reference,
             grating: place.rating,
             gUserRatingsTotal: place.user_ratings_total,
             hours: place.opening_hours.open_now
