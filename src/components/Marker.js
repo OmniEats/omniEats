@@ -9,7 +9,7 @@ const Marker = ({
   restaurantId,
   color,
   omniRating,
-  imgRef,
+  imgUrl,
   loggedInUser,
   hours,
   grating,
@@ -20,7 +20,6 @@ const Marker = ({
   userLocation,
 }) => {
   const key = process.env.MAPKEY || 'AIzaSyBP8sgCR137j4KQuKiBB-3e8qKmkky3JMk';
-  let currentImg = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${imgRef}&sensor=false&maxheight=500&maxwidth=500&key=${key}`;
   return (
     <Popup
       trigger={
@@ -69,11 +68,11 @@ const Marker = ({
           )}
         </div>
         <Popup
-          trigger={<img width="188" height="188" src={currentImg} />}
+          trigger={<img width="188" height="188" src={imgUrl} />}
           position="right center"
           on="hover"
         >
-          <img width="500" height="500" src={currentImg} />
+          <img width="500" height="500" src={imgUrl} />
         </Popup>
       </div>
     </Popup>

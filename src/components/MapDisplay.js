@@ -128,10 +128,10 @@ class MapDisplay extends React.Component {
                     ? restaurant.omniRating.rating
                     : 'No Votes Yet'
                 }
-                imgRef={restaurant.imgRef}
                 grating={restaurant.grating}
                 gUserRatingsTotal={restaurant.gUserRatingsTotal}
                 hours={restaurant.hours}
+                imgUrl={restaurant.imgUrl}
               />
             );
           })}
