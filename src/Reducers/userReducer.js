@@ -11,11 +11,11 @@ const _createUser = user => {
 };
 
 export const createUser = user => {
+  console.log("Got Here")
   return async dispatch => {
     try {
       const response = await axios.post('/api/users', user);
       dispatch(_createUser(response.data));
-      window.location.hash = '/login';
     } catch (ex) {
       dispatch(_catchError(ex.response.data));
     }
