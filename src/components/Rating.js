@@ -6,7 +6,7 @@ class Rating extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      vote: ''
+      vote: 'Meat Lovers'
     };
     this.onSelectChange = this.onSelectChange.bind(this);
   }
@@ -20,7 +20,7 @@ class Rating extends React.Component {
     const { makeVote, restaurantId, loggedInUser } = this.props;
     return (
       <div>
-        <select defaultValue={'No Data'} onChange={onSelectChange}>
+        <select defaultValue='Meat Lovers' onChange={onSelectChange}>
           <option value="Meat Lovers">Meat Lovers</option>
           <option value="Half-Half">Half-Half</option>
           <option value="Vegetarian">Vegetarian</option>

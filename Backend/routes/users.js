@@ -2,13 +2,7 @@ const router = require('express').Router();
 const { models } = require('../index');
 const { User } = models
 
-router.get('/', async (req, res, next) => {
-  try {
-    res.send(await User.findAll());
-  } catch (e) {
-    next(e);
-  }
-});
+
 
 router.get('/:id', async (req, res, next) => {
   try {
