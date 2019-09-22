@@ -22,14 +22,15 @@ class SignUp extends React.Component{
   render(){
     const {firstName, lastName, email, password, passwordConfirm} = this.state;
     const {onChange} = this;
-    const {error} = this.props;
+    const {error, handleCreate} = this.props;
+
     return(
       <div style={{
         display: 'flex',
         alignItems: 'top',
         justifyContent: 'top',
         flexDirection: 'column'}}>
-        <form onSubmit={this.props.handleCreate}>
+        <form onSubmit={() => handleCreate(firstName, lastName, email, password)}>
           <div>
             <label>First Name</label>
             <input type="text" name="firstName" required onChange={onChange}/>
@@ -51,7 +52,7 @@ class SignUp extends React.Component{
             <input type="password" name="passwordConfirm" required onChange={onChange}/>
             {(password !== passwordConfirm) ? <div><font color="red">PASSWORDS DONT MATCH! 🤪</font></div>: ''}
           </div>
-          <button disabled={(!firstName || !lastName || !email || !password || !passwordConfirm) ? true : false}>Create Account</button>
+          <input type="submit" disabled={(!firstName || !lastName || !email || !password || !passwordConfirm) ? true : false} />
           <div><font color="red">{(error === 'Account Already Exists') ? `${error} 🧐` : ''}</font></div>
         </form>
       </div>
@@ -67,14 +68,13 @@ const mapStateToProps = ({error})=>{
 
 const mapDispatchToProps = ( dispatch )=>{
   return {
-    handleCreate: function(ev){
-      event.preventDefault();
+    handleCreate: function(firstName, lastName, email, password){
 
       dispatch(createUser({
-        firstName: ev.target.firstName.value,
-        lastName: ev.target.lastName.value,
-        email: ev.target.email.value,
-        password: ev.target.password.value
+        firstName,
+        lastName,
+        email,
+        password
 
       }))
     }
