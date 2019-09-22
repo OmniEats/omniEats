@@ -30,7 +30,10 @@ class SignUp extends React.Component{
         alignItems: 'top',
         justifyContent: 'top',
         flexDirection: 'column'}}>
-        <form onSubmit={() => handleCreate(firstName, lastName, email, password)}>
+        <form onSubmit={(ev) => {
+          ev.preventDefault()
+          handleCreate(firstName, lastName, email, password)
+        }}>
           <div>
             <label>First Name</label>
             <input type="text" name="firstName" required onChange={onChange}/>
