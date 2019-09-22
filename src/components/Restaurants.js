@@ -8,21 +8,20 @@ const Restaurants = ({
   loggedInUser,
   omniEatsRestaurants,
   loadDirections,
-  lat,
-  lng,
   userLocation
 }) => {
   return (
     <div style={{ marginLeft: 162, alignContent: 'center' }}>
-      <Sidebar />
       <br />
       <br />
       <br />
-      <ul className='restaurantList'>
+      <ul className="restaurantList">
         {omniEatsRestaurants.map(restaurant => {
           return (
-            <li key={restaurant.id} style={{ marginRight: 65 }}>
-              <div style={{ fontSize: 18, color: 'white' }}>{restaurant.name}</div>
+            <li key={restaurant.id} style={{ marginRight: 65, marginLeft: 30 }}>
+              <div style={{ fontSize: 18, color: 'white' }}>
+                {restaurant.name}
+              </div>
               {restaurant.hours ? (
                 <div style={{ fontSize: 16, color: 'green' }}>{'Open'}</div>
               ) : (
@@ -42,19 +41,12 @@ const Restaurants = ({
                 <Rating restaurantId={restaurant.id} />
               </div>
               <div>
-                <button
-                  type="button"
-                  onClick={() => loadDirections(userLocation, { lat, lng })}
-                >
-                  Directions
-                </button>
-              </div>
-              <div>
                 {!loggedInUser.id && (
                   <div style={{ color: 'white' }}>
                     Must Log In to Rate Restaurant
                   </div>
                 )}
+                <img width="300" height="300" src={restaurant.imgUrl} />
               </div>
               <br />
             </li>

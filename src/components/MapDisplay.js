@@ -11,7 +11,8 @@ class MapDisplay extends React.Component {
     super(props);
     this.state = {
       heatmapToggle: true,
-      gDirections: {}
+      gDirections: {},
+      places: []
     };
     this.toggleHeatMap = this.toggleHeatMap.bind(this);
   }
@@ -20,14 +21,20 @@ class MapDisplay extends React.Component {
     if (prevProps.filters.length !== filters.length) {
       this.props.allOmniEats(filters);
     }
-    if (Object.keys(prevProps.directions).length !== Object.keys(directions).length || prevProps.directions.origin !== directions.origin || prevProps.directions.destination !== directions.destination) {
-      this.setState({gDirections: directions.query})
+    if (
+      Object.keys(prevProps.directions).length !==
+        Object.keys(directions).length ||
+      prevProps.directions.origin !== directions.origin ||
+      prevProps.directions.destination !== directions.destination
+    ) {
+      this.setState({ gDirections: directions.query });
     }
   }
   componentDidMount() {
-    const { filters } = this.props;
+    const { filters, omniEatsRestaurants } = this.props;
     this.props.getUserLocation();
     this.props.allOmniEats(filters);
+    this.setState({ places: omniEatsRestaurants });
   }
   toggleHeatMap() {
     this.setState(
@@ -47,12 +54,12 @@ class MapDisplay extends React.Component {
   render() {
     const { toggleHeatMap } = this;
     const { omniEatsRestaurants, center, zoom, directions } = this.props;
-    const { gDirections } = this.state
-    console.log(gDirections)
-    const data = omniEatsRestaurants.map(restaurant => ({
-      lat: restaurant.latitude,
-      lng: restaurant.longitude,
-      weight: restaurant.grating
+    const { gDirections, places } = this.state;
+    console.log(gDirections);
+    const data = places.map(place => ({
+      lat: place.latitude,
+      lng: place.longitude,
+      weight: place.grating
     }));
     const heatmapData = {
       positions: data,
@@ -62,23 +69,32 @@ class MapDisplay extends React.Component {
       }
     };
     const apiIsLoaded = (map, maps) => {
+      const trafficLayer = new google.maps.TrafficLayer();
+      trafficLayer.setMap(map);
       if (directions.query) {
         const directionService = new maps.DirectionsService();
         const directionDisplay = new maps.DirectionsRenderer();
-        directionService.route({origin: directions.query.origin, destination: directions.query.destination, travelMode: "DRIVING"}, (response, status) => {
-          if (status === 'OK') {
-            directionDisplay.setDirections(response);
-            console.log(response)
-            const routePolyline = new google.maps.Polyline({
-              path: response.routes[0].overview_path
-            })
-            routePolyline.setMap(map)
-          } else {
-            window.alert('Directions request failed to ' + status)
+        directionService.route(
+          {
+            origin: directions.query.origin,
+            destination: directions.query.destination,
+            travelMode: 'DRIVING'
+          },
+          (response, status) => {
+            if (status === 'OK') {
+              directionDisplay.setDirections(response);
+              console.log(response);
+              const routePolyline = new google.maps.Polyline({
+                path: response.routes[0].overview_path
+              });
+              routePolyline.setMap(map);
+            } else {
+              window.alert('Directions request failed to ' + status);
+            }
           }
-        });
+        );
       }
-    }
+    };
     return (
       <div
         style={{
