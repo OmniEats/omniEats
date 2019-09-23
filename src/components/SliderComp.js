@@ -3,7 +3,7 @@ import  Slider  from 'react-slider-simple';
 import axios from 'axios';
 import { getSlider } from '../Reducers/omniEatsReducer';
 import { connect } from 'react-redux';
-import { MDBBtn, MDBIcon } from "mdbreact";
+import { MDBBtn, MDBIcon, MDBAnimation } from "mdbreact";
 
 const stylinBar = {
   marginBottom: '15px',
@@ -56,6 +56,7 @@ class SliderComp extends Component {
           </div>
       </div>
       <div style={stylinBar}>
+      <MDBAnimation type="pulse" count="2">
         <span className="left" style={{float: 'left', marginLeft: '-20px'}}><MDBIcon icon="carrot" style={{align: 'left', color: 'orange'}}/></span>
         <span className="right" style={{float: 'right', marginRight: '-20px'}}><MDBIcon icon="drumstick-bite" style={{align: 'right', color: 'brown'}}/></span>
         <Slider
@@ -67,8 +68,9 @@ class SliderComp extends Component {
           sliderPathColor='green'
           rounded={true}
           />
-        </div>
-        </div>
+        </MDBAnimation>
+      </div>
+    </div>
     );
   }
 }
