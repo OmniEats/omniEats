@@ -1,21 +1,21 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import  Slider  from 'react-slider-simple';
 import axios from 'axios';
 import { getSlider } from '../Reducers/omniEatsReducer';
 import { connect } from 'react-redux';
+import { MDBBtn, MDBIcon } from "mdbreact";
 
 const stylinBar = {
-  marginBottom: '1px',
-  marginRight: '150px',
-  marginLeft: '300px',
-  textAlign: 'center',
+  marginBottom: '15px',
+  marginRight: '250px',
+  marginLeft: '250px',
+  align: 'center',
+  padding: '0.2rem'
 }
 
 const stylinHeader = {
-  padding: '1rem',
-  backgroundColor: '#33b5e5',
-  border: '2px solid #fff',
-  color: '#fff',
+  padding: '0.5rem',
+  backgroundColor: '#504d54',
   textAlign: 'center',
 }
 
@@ -26,7 +26,7 @@ class SliderComp extends Component {
       percent: 50,
     }
     this.onChange = this.onChange.bind(this);
-    this.onDone = this.onDone.bind(this);
+    this.onReset = this.onReset.bind(this);
   }
 
   onChange(percent){
@@ -35,25 +35,33 @@ class SliderComp extends Component {
     sliderMeat(percent)
   }
 
-  onDone(percent){
-
+  onReset(){
+    this.setState({ percent: 50});
+    const { sliderMeat } = this.props;
+    sliderMeat(50);
   }
 
   render() {
     const { percent } = this.state;
-    const {onChange, onDone} = this;
+    const {onChange, onReset} = this;
     return (
       <div>
       <div style={stylinHeader}>
-          <div>Drag Right For MEATS</div>
+          <div>
+            <Fragment>
+              <MDBBtn tag="a" size="sm" color="red" onClick={onReset}>
+                RESET
+              </MDBBtn>
+            </Fragment>
+          </div>
       </div>
-
       <div style={stylinBar}>
+        <span className="left" style={{float: 'left', marginLeft: '-20px'}}><MDBIcon icon="carrot" style={{align: 'left', color: 'orange'}}/></span>
+        <span className="right" style={{float: 'right', marginRight: '-20px'}}><MDBIcon icon="drumstick-bite" style={{align: 'right', color: 'brown'}}/></span>
         <Slider
           defaultValue={50}
           value={percent}
           onChange={onChange}
-          onDone={onDone}
           thumbColor="rgb(219, 112, 147)"
           shadowColor="rgb(119, 12, 47)"
           sliderPathColor='green'
