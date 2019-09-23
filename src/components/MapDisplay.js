@@ -11,8 +11,7 @@ class MapDisplay extends React.Component {
     super(props);
     this.state = {
       heatmapToggle: true,
-      gDirections: {},
-      places: []
+      gDirections: {}
     };
     this.toggleHeatMap = this.toggleHeatMap.bind(this);
   }
@@ -31,10 +30,9 @@ class MapDisplay extends React.Component {
     }
   }
   componentDidMount() {
-    const { filters, omniEatsRestaurants } = this.props;
+    const { filters } = this.props;
     this.props.getUserLocation();
     this.props.allOmniEats(filters);
-    this.setState({ places: omniEatsRestaurants });
   }
   toggleHeatMap() {
     this.setState(
@@ -54,12 +52,11 @@ class MapDisplay extends React.Component {
   render() {
     const { toggleHeatMap } = this;
     const { omniEatsRestaurants, center, zoom, directions } = this.props;
-    const { gDirections, places } = this.state;
-    console.log(gDirections);
-    const data = places.map(place => ({
-      lat: place.latitude,
-      lng: place.longitude,
-      weight: place.grating
+
+    const data = omniEatsRestaurants.map(restaurant => ({
+      lat: Number(restaurant.latitude),
+      lng: Number(restaurant.longitude),
+      weight: Number(restaurant.grating)
     }));
     const heatmapData = {
       positions: data,
