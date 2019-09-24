@@ -95,11 +95,11 @@ class MapDisplay extends React.Component {
     return (
       <div
         style={{
-          height: '85vh',
-          minWidth: 1198,
+          height: '72vh',
+          minWidth: 1120,
           width: '100%',
           marginTop: 82,
-          marginLeft: 162
+          position: 'fixed'
         }}
       >
         <SliderComp />
@@ -151,7 +151,7 @@ class MapDisplay extends React.Component {
             );
           })}
         </GoogleMapReact>
-        <button onClick={toggleHeatMap}>Toggle Heatmap</button>
+        <button onClick={toggleHeatMap} style={{marginLeft: 162}}>Toggle Heatmap</button>
       </div>
     );
   }
