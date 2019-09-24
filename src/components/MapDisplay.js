@@ -99,7 +99,8 @@ class MapDisplay extends React.Component {
           minWidth: 1198,
           width: '100%',
           marginTop: 82,
-          marginLeft: 162
+          marginLeft: 162,
+          position: 'fixed'
         }}
       >
         <SliderComp />
