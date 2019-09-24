@@ -76,4 +76,16 @@ router.post('/slider', async (req, res, next) => {
     next(ex);
   }
 });
+
+router.get('/', async (req, res, next) => {
+  try {
+    const allRestaurants = await Restaurant.findAll({include: [{model: OmniRating}]});
+    res.send(allRestaurants);
+    }
+  catch (ex) {
+    next(ex);
+  }
+});
+
+
 module.exports = router;
