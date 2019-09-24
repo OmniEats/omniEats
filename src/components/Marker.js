@@ -2,7 +2,7 @@ import React from 'react';
 import Popup from 'reactjs-popup';
 import Rating from './Rating';
 import { connect } from 'react-redux';
-import { getDirections } from '../store';
+import { getDirections, getRated } from '../store';
 
 const Marker = ({
   name,
@@ -18,8 +18,11 @@ const Marker = ({
   lat,
   lng,
   userLocation,
+  loadRated
 }) => {
   const key = process.env.MAPKEY || 'AIzaSyBP8sgCR137j4KQuKiBB-3e8qKmkky3JMk';
+  loadRated();
+
   return (
     <Popup
       trigger={
@@ -90,7 +93,8 @@ const stateToProps = ({ loggedInUser, userLocation, directions }) => {
 const dispatchToProps = dispatch => {
   return {
     loadDirections: (origin, destination) =>
-      dispatch(getDirections(origin, destination))
+      dispatch(getDirections(origin, destination)),
+    loadRated: () => dispatch(getRated())
   };
 };
 
