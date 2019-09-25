@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { castVote } from '../store';
+import { castVote, getRated } from '../store';
 
 class Rating extends React.Component {
   constructor(props) {
@@ -9,15 +9,22 @@ class Rating extends React.Component {
       vote: 'Meat Lovers'
     };
     this.onSelectChange = this.onSelectChange.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
   onSelectChange(ev) {
     this.setState({ vote: ev.target.value });
   }
 
-  render() {
+  onClick(ev){
+    ev.preventDefault();
+    const { restaurantId, makeVote, sendRest } = this.props;
     const { vote } = this.state;
-    const { onSelectChange } = this;
-    const { makeVote, restaurantId, loggedInUser } = this.props;
+    makeVote({restaurantId, vote});
+  }
+
+  render() {
+    const { onSelectChange, onClick } = this;
+    const { loggedInUser } = this.props;
     return (
       <div>
         <select defaultValue='Meat Lovers' onChange={onSelectChange}>
@@ -28,10 +35,7 @@ class Rating extends React.Component {
         <button
           type="submit"
           disabled={!loggedInUser.id ? true : false}
-          onClick={ev => {
-            ev.preventDefault();
-            makeVote({ restaurantId, vote });
-          }}
+          onClick={onClick}
         >
           Rate Restaurant
         </button>
@@ -48,7 +52,8 @@ const stateToProps = ({ loggedInUser }) => {
 
 const dispatchToProps = dispatch => {
   return {
-    makeVote: data => dispatch(castVote(data))
+    makeVote: data => dispatch(castVote(data)),
+    sendRest: () => dispatch(getRated())
   };
 };
 
