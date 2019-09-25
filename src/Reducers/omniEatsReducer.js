@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const GET_ALL_OMNIEATS = 'GET_ALL_OMNIEATS';
 const GET_SLIDER = 'GET_SLIDER';
-const GET_RATED = 'GET_RATED';
 
 const _getAllOmniEats = restaurants => {
   return {
@@ -15,13 +14,6 @@ const _getSlider = percent => {
   return {
     type: GET_SLIDER,
     percent
-  }
-}
-
-const _getRated = rated => {
-  return {
-    type: GET_RATED,
-    rated
   }
 }
 
@@ -49,22 +41,12 @@ export const getSlider = (percent) => {
   }
 }
 
-export const getRated = () => {
-  return async dispatch => {
-    const response = await axios.get('/api/omniEats');
-    const rated = response.data;
-    dispatch(_getRated(rated));
-  }
-}
-
 export const omniEatsReducer = (state = [], action) => {
   switch (action.type) {
     case GET_ALL_OMNIEATS:
       return action.restaurants;
     case GET_SLIDER:
       return action.percent;
-    case GET_RATED:
-      return action.rated;
   }
   return state;
 };

@@ -1,10 +1,10 @@
-import React from 'react';
-import GoogleMapReact from 'google-map-react';
-import { connect } from 'react-redux';
-import Marker from './Marker';
-import { getAllOmniEats, currentLocation, getDirections } from '../store';
-import UserMarker from './UserMarker';
-import SliderComp from './SliderComp'
+import React from "react";
+import GoogleMapReact from "google-map-react";
+import { connect } from "react-redux";
+import Marker from "./Marker";
+import { getAllOmniEats, currentLocation, getDirections } from "../store";
+import UserMarker from "./UserMarker";
+import SliderComp from "./SliderComp";
 
 class MapDisplay extends React.Component {
   constructor(props) {
@@ -31,8 +31,8 @@ class MapDisplay extends React.Component {
   }
   componentDidMount() {
     const { filters } = this.props;
+    this.props.allOmniEats(filters)
     this.props.getUserLocation();
-    this.props.allOmniEats(filters);
   }
   toggleHeatMap() {
     this.setState(
@@ -75,10 +75,10 @@ class MapDisplay extends React.Component {
           {
             origin: directions.query.origin,
             destination: directions.query.destination,
-            travelMode: 'DRIVING'
+            travelMode: "DRIVING"
           },
           (response, status) => {
-            if (status === 'OK') {
+            if (status === "OK") {
               directionDisplay.setDirections(response);
               console.log(response);
               const routePolyline = new google.maps.Polyline({
@@ -86,7 +86,7 @@ class MapDisplay extends React.Component {
               });
               routePolyline.setMap(map);
             } else {
-              window.alert('Directions request failed to ' + status);
+              window.alert("Directions request failed to " + status);
             }
           }
         );
@@ -95,11 +95,11 @@ class MapDisplay extends React.Component {
     return (
       <div
         style={{
-          height: '85vh',
-          minWidth: 1198,
-          width: '100%',
+          height: "72vh",
+          minWidth: 1120,
+          width: "100%",
           marginTop: 82,
-          marginLeft: 162
+          position: "fixed"
         }}
       >
         <SliderComp />
@@ -107,8 +107,8 @@ class MapDisplay extends React.Component {
           ref={el => (this._googleMap = el)}
           bootstrapURLKeys={{
             key:
-              process.env.MAPKEY || 'AIzaSyBP8sgCR137j4KQuKiBB-3e8qKmkky3JMk',
-            libraries: ['visualization']
+              process.env.MAPKEY || "AIzaSyBP8sgCR137j4KQuKiBB-3e8qKmkky3JMk",
+            libraries: ["visualization"]
           }}
           defaultCenter={center}
           defaultZoom={zoom}
@@ -127,21 +127,21 @@ class MapDisplay extends React.Component {
                 lng={restaurant.longitude}
                 color={
                   !restaurant.omniRating
-                    ? 'blue'
-                    : restaurant.omniRating.rating === 'Meat Lovers'
-                    ? 'red'
-                    : restaurant.omniRating.rating === 'Half-Half'
-                    ? 'yellow'
-                    : restaurant.omniRating.rating === 'Vegetarian'
-                    ? 'green'
-                    : 'blue'
+                    ? "blue"
+                    : restaurant.omniRating.rating === "Meat Lovers"
+                    ? "red"
+                    : restaurant.omniRating.rating === "Half-Half"
+                    ? "yellow"
+                    : restaurant.omniRating.rating === "Vegetarian"
+                    ? "green"
+                    : "blue"
                 }
                 name={restaurant.name}
                 googleId={restaurant.googleId}
                 omniRating={
                   restaurant.omniRating
                     ? restaurant.omniRating.rating
-                    : 'No Votes Yet'
+                    : "No Votes Yet"
                 }
                 grating={restaurant.grating}
                 gUserRatingsTotal={restaurant.gUserRatingsTotal}
@@ -151,7 +151,9 @@ class MapDisplay extends React.Component {
             );
           })}
         </GoogleMapReact>
-        <button onClick={toggleHeatMap}>Toggle Heatmap</button>
+        <button onClick={toggleHeatMap} style={{ marginLeft: 162 }}>
+          Toggle Heatmap
+        </button>
       </div>
     );
   }

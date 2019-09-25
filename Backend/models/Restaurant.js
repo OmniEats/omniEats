@@ -31,7 +31,8 @@ const Restaurant = db.define('restaurant', {
   gUserRatingsTotal: {
     type: Sequelize.DECIMAL
   },
-  hours: {type: Sequelize.BOOLEAN}
+  hours: {type: Sequelize.BOOLEAN},
+  vicinity: Sequelize.STRING
 });
 
 Restaurant.beforeCreate(restaurantInstance => {
