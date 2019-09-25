@@ -18,7 +18,8 @@ const Marker = ({
   lat,
   lng,
   userLocation,
-  loadRated
+  loadRated,
+  vicinity
 }) => {
   const key = process.env.MAPKEY || 'AIzaSyBP8sgCR137j4KQuKiBB-3e8qKmkky3JMk';
   loadRated();
@@ -48,6 +49,7 @@ const Marker = ({
         ) : (
           <div style={{ fontSize: 13, color: 'red' }}>{'Closed'}</div>
         )}
+        <div style={{ color: 'white' }}>{vicinity}</div>
         <div style={{ fontSize: 14, color: 'lightgrey' }}>
           Google Rating: {grating} ({gUserRatingsTotal})
         </div>
@@ -59,7 +61,7 @@ const Marker = ({
           <button
             type="button"
             onClick={() => {
-              loadDirections(userLocation, { lat, lng })
+              loadDirections(userLocation, { lat, lng });
             }}
           >
             Directions

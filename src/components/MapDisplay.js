@@ -61,8 +61,8 @@ class MapDisplay extends React.Component {
     const heatmapData = {
       positions: data,
       options: {
-        radius: 80,
-        opacity: 0.8
+        radius: 50,
+        opacity: 0.75
       }
     };
     const apiIsLoaded = (map, maps) => {
@@ -147,6 +147,7 @@ class MapDisplay extends React.Component {
                 gUserRatingsTotal={restaurant.gUserRatingsTotal}
                 hours={restaurant.hours}
                 imgUrl={restaurant.imgUrl}
+                vicinity={restaurant.vicinity}
               />
             );
           })}

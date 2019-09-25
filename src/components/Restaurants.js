@@ -1,37 +1,50 @@
 import React from 'react';
 import Rating from './Rating';
 import { connect } from 'react-redux';
-import { getDirections } from '../store';
-import Sidebar from './SideBar';
+import { getDirections, getRated } from '../store';
+import { NavLink } from 'react-router-dom';
+import Popup from 'reactjs-popup';
 
 const Restaurants = ({
   loggedInUser,
   omniEatsRestaurants,
   loadDirections,
-  userLocation
+  userLocation,
+  loadRated
 }) => {
+  loadRated();
   return (
-    <div style={{ marginLeft: 162, alignContent: 'center' }}>
+    <div>
       <br />
       <br />
       <br />
       <ul className="restaurantList">
         {omniEatsRestaurants.map(restaurant => {
+          let lat = restaurant.latitude;
+          let lng = restaurant.longitude;
           return (
-            <li key={restaurant.id} style={{ marginRight: 65, marginLeft: 30 }}>
-              <div style={{ fontSize: 18, color: 'white' }}>
+            <li
+              key={restaurant.id}
+              style={{
+                margin: 'auto',
+                border: '1px solid lightgrey',
+                padding: 15
+              }}
+            >
+              <div style={{ fontSize: 20, color: 'white' }}>
                 {restaurant.name}
               </div>
               {restaurant.hours ? (
-                <div style={{ fontSize: 16, color: 'green' }}>{'Open'}</div>
+                <div style={{ color: 'green' }}>{'Open'}</div>
               ) : (
-                <div style={{ fontSize: 15, color: 'red' }}>{'Closed'}</div>
+                <div style={{ color: 'red' }}>{'Closed'}</div>
               )}
-              <div style={{ fontSize: 16, color: 'lightgrey' }}>
+              <div style={{ color: 'white' }}>{restaurant.vicinity}</div>
+              <div style={{ color: 'white' }}>
                 Google Rating: {restaurant.grating} (
                 {restaurant.gUserRatingsTotal})
               </div>
-              <div>
+              <div style={{ color: 'white' }}>
                 OmniRating:{' '}
                 {restaurant.omniRating
                   ? restaurant.omniRating.rating
@@ -46,9 +59,37 @@ const Restaurants = ({
                     Must Log In to Rate Restaurant
                   </div>
                 )}
-                <img width="300" height="300" src={restaurant.imgUrl} />
+                <Popup
+                  trigger={
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          loadDirections(userLocation, { lat, lng });
+                        }}
+                      >
+                        Directions
+                      </button>
+                    </div>
+                  }
+                  position="left center"
+                  closeOnDocumentClick
+                >
+                  <div style={{ backgroundColor: '#333' }}>
+                    <NavLink className="navlink" exact to="/">
+                      View Route on Map
+                    </NavLink>
+                  </div>
+                </Popup>
               </div>
-              <br />
+              <div>
+                <img
+                  style={{ border: '1px solid black' }}
+                  src={restaurant.imgUrl}
+                  width="400"
+                  height="400"
+                />
+              </div>
             </li>
           );
         })}
@@ -58,10 +99,10 @@ const Restaurants = ({
 };
 
 const stateToProps = ({
+  omniEatsRestaurants,
   loggedInUser,
   userLocation,
-  directions,
-  omniEatsRestaurants
+  directions
 }) => {
   return {
     loggedInUser,
@@ -74,7 +115,8 @@ const stateToProps = ({
 const dispatchToProps = dispatch => {
   return {
     loadDirections: (origin, destination) =>
-      dispatch(getDirections(origin, destination))
+      dispatch(getDirections(origin, destination)),
+    loadRated: () => dispatch(getRated())
   };
 };
 
