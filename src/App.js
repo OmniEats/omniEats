@@ -7,7 +7,6 @@ import MainLogin from './components/MainLogin';
 import Restaurants from './components/Restaurants';
 import { connect } from 'react-redux';
 import { loginUser, getAllOmniEats } from './store'
-import Profile from './components/Profile'
 class App extends React.Component {
 
   componentDidMount() {
@@ -22,7 +21,6 @@ class App extends React.Component {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={MainLogin} />
         <Route path="/restaurants" component={Restaurants} />
-        <Route path="/profile" component={Profile} />
       </Router>
     );
   }
