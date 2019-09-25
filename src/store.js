@@ -4,7 +4,7 @@ import { googleReducer, getMileRestaurants } from './Reducers/googleReducer';
 import { loginReducer, loginUser, logoutUser } from './Reducers/loginReducer'
 import { userReducer, createUser } from './Reducers/userReducer'
 import { errorReducer, _catchError } from './Reducers/errorReducer'
-import { omniEatsReducer, getAllOmniEats, castVote, getSlider, getRated } from './Reducers/omniEatsReducer';
+import { omniEatsReducer, getAllOmniEats, castVote, getSlider } from './Reducers/omniEatsReducer';
 import { userLocationReducer, currentLocation } from './Reducers/userLocationReducer';
 import { filterReducer, addorRemoveFilter } from './Reducers/filterReducer';
 import { directionsReducer, getDirections } from './Reducers/directionsReducer'
@@ -35,6 +35,5 @@ export {
   currentLocation,
   addorRemoveFilter,
   getDirections,
-  getSlider,
-  getRated
+  getSlider
 }
