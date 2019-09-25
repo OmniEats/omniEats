@@ -31,6 +31,7 @@ class MapDisplay extends React.Component {
   }
   componentDidMount() {
     const { filters } = this.props;
+    this.props.allOmniEats(filters)
     this.props.getUserLocation();
   }
   toggleHeatMap() {
