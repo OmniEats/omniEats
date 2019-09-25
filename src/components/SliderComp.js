@@ -27,10 +27,14 @@ class SliderComp extends Component {
     }
     this.onChange = this.onChange.bind(this);
     this.onReset = this.onReset.bind(this);
+    this.onDone = this.onDone.bind(this);
   }
 
   onChange(percent){
     this.setState({ percent });
+  }
+
+  onDone(percent){
     const { sliderMeat } = this.props;
     sliderMeat(percent)
   }
@@ -43,7 +47,7 @@ class SliderComp extends Component {
 
   render() {
     const { percent } = this.state;
-    const {onChange, onReset} = this;
+    const {onChange, onReset, onDone} = this;
     return (
       <div>
       <div style={stylinHeader}>
@@ -63,6 +67,7 @@ class SliderComp extends Component {
           defaultValue={50}
           value={percent}
           onChange={onChange}
+          onDone={onDone}
           thumbColor="rgb(219, 112, 147)"
           shadowColor="rgb(119, 12, 47)"
           sliderPathColor='green'
