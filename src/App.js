@@ -6,12 +6,13 @@ import Home from './components/Home';
 import MainLogin from './components/MainLogin';
 import Restaurants from './components/Restaurants';
 import { connect } from 'react-redux';
-import { loginUser } from './store'
-
+import { loginUser, getAllOmniEats } from './store'
+import Profile from './components/Profile'
 class App extends React.Component {
 
   componentDidMount() {
     this.props.loadSession()
+    this.props.loadOmniEats(this.props.filters)
   }
 
   render() {
@@ -21,15 +22,24 @@ class App extends React.Component {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={MainLogin} />
         <Route path="/restaurants" component={Restaurants} />
+        <Route path="/profile" component={Profile} />
       </Router>
     );
   }
 }
 
-const dispatchToProps = dispatch => {
+const stateToProps = ({ filters }) => {
   return {
-  loadSession: () => dispatch(loginUser())
+    filters
   }
 }
 
-export default connect(null, dispatchToProps)(App);
+const dispatchToProps = dispatch => {
+  return {
+  loadSession: () => dispatch(loginUser()),
+  loadOmniEats: (filter) => dispatch(getAllOmniEats(filter))
+
+  }
+}
+
+export default connect(stateToProps, dispatchToProps)(App);

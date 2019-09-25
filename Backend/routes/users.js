@@ -2,14 +2,16 @@ const router = require('express').Router();
 const { models } = require('../index');
 const { User } = models
 
-
-
 router.get('/:id', async (req, res, next) => {
   try {
     const aUser = await User.findOne({
       where: {
         id: req.params.id
-      }
+      },
+      include: [{
+        model: OmniRatings,
+        include: [{model: Restaurant}]
+      }]
     });
     res.status(200).send(aUser);
   } catch (e) {
