@@ -24,7 +24,6 @@ router.post('/', (req, res, next) => {
     .asPromise()
     .then(results => {
       results.json.results.forEach(place => {
-        console.log(place)
         Restaurant.findOrCreate({
           where: {
             googleId: place.place_id
