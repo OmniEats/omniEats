@@ -36,7 +36,7 @@ const Restaurant = db.define('restaurant', {
 });
 
 Restaurant.beforeCreate(restaurantInstance => {
-  restaurantInstance.imgUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&maxHeight=500&photoreference=${restaurantInstance.imgRef}&key=${process.env.MAPKEY}`
+  restaurantInstance.imgUrl = restaurantInstance.imgRef ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&maxHeight=500&photoreference=${restaurantInstance.imgRef}&key=${process.env.MAPKEY}` : "https://via.placeholder.com/150"
 })
 
 
