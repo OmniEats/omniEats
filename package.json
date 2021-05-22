@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {"node": "12.18.0" },
   "scripts": {
     "seed": "node Backend/seed.js",
     "webpack": "webpack",
